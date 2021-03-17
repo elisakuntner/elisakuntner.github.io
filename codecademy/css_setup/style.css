@@ -10,3 +10,6 @@ p {
   }
 
   .uppercase {text-transform: uppercase;}
+
+  #article-title {font-family: cursive;
+text-transform: capitalize;}
