@@ -50,6 +50,7 @@ body {
   }
   
   .caption {
+    opacity: 0.75;
     display: block;
     font-family: 'Playfair Display', serif;
     font-size: 14px;
