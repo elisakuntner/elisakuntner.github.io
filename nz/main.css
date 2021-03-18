@@ -59,3 +59,16 @@ main figure img {
 main ul {
     list-style-type: circle;
 }
+
+footer .next {
+    float:right;
+
+}
+
+footer .back { 
+    float: left;
+}
+
+footer {
+    padding: 1em 0 3em 0;
+}
