@@ -12,10 +12,21 @@ header p {
     font-size: 0.8em;
     padding-right: lem;
     margin-top: -2em;
-
+}
+header nav img {
+    border-radius: 50%;
+    
 }
 .white, 
 .white a:link
 .a:visited {
     color: white;
 }
+
+a:link,
+a:visited {
+    color: black;
+
+}
+
+
