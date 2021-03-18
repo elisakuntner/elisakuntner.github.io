@@ -13,15 +13,18 @@ header p {
     padding-right: lem;
     margin-top: -2em;
 }
-header nav img {
-    border-radius: 50%;
-    
-}
+
 .white, 
 .white a:link,
 .white a:visited {
     color: white;
 }
+
+header nav img {
+    border-radius: 50%;
+    
+}
+
 
 a:link,
 a:visited {
