@@ -46,3 +46,7 @@ main figure {
     margin-left: 0;
     width: 100%;
 }
+
+main figure img {
+    border: 1px solid black;
+}
