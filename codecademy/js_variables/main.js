@@ -1,4 +1,4 @@
-var myName="Elisa"
-var myCity="Innsbruck"
+let newVariable = 1
 
-console.log(`My name is ${myName}. My favorite city is ${myCity}.`)
+console.log(typeof newVariable);
+console.log(typeof newVariable);
