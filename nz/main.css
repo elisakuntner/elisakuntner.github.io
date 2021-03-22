@@ -3,9 +3,11 @@ body {
     margin: auto;
     font-family: 'Open Sans', sans-serif;
 }
+
 header {
     text-align: center;
 }
+
 header p {
     text-align: right;
     font-weight: bold;
@@ -14,7 +16,7 @@ header p {
     margin-top: -2em;
 }
 
-.white, 
+.white,
 .white a:link,
 .white a:visited {
     color: white;
@@ -22,7 +24,7 @@ header p {
 
 header nav img {
     border-radius: 50%;
-    
+
 }
 
 
@@ -31,6 +33,7 @@ a:visited {
     color: black;
 
 }
+
 header address {
     font-size: 0.9em;
     font-style: italic;
@@ -42,7 +45,7 @@ main {
 }
 
 main p {
-    text-align: justify; 
+    text-align: justify;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -54,6 +57,7 @@ main figure {
 main figure img {
     border: 1px solid black;
 }
+
 #map {
     height: 360px;
     width: 100%;
@@ -65,20 +69,22 @@ main ul {
 }
 
 footer .next {
-    float:right;
+    float: right;
 
 }
 
-footer .back { 
+footer .back {
     float: left;
 }
 
 footer {
     padding: 1em 0 3em 0;
 }
+
 .mr-3 {
     margin-right: 0.3em;
 }
+
 .ml-3 {
     margin-left: 0.3em;
 }
