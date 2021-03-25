@@ -6,7 +6,7 @@ let stop = {
     lat: -40.50,
     lng: 172.54,
     user: "elisakuntner",
-    wikipedia: "https://en.wikipedia.org/wiki/Abel_Tasman_National_Parkhttps://en.wikipedia.org/wiki/Abel_Tasman_National_Park"
+    wikipedia: "https://en.wikipedia.org/wiki/Abel_Tasman_National_Park"
 
 }
 
