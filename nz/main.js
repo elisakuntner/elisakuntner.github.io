@@ -59,4 +59,10 @@ nav.onchange = (evt) => {
     let link = `https://${username}.github.io/nz/index.html`;
     console.log(username, link);
 };
+
+window.location.href = link; //window=unser browserwindow
+
+
+
+
 //console.log(document.querySelector("#map"));
