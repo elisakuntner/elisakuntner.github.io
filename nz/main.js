@@ -24,7 +24,7 @@ for (let entry of ROUTE){
     //console.log(entry);
 
     nav.innerHTML += `
-       <option value="${entry.user}">${entry.name}</option>
+       <option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>
     `;
 
     let mrk = L.marker([entry.lat, entry.lng ]).addTo(map);
