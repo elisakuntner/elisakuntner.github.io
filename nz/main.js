@@ -15,7 +15,7 @@ const map = L.map("map",{
     center: [ stop.lat, stop.lng ], //coordinaten einfügen
     zoom: 13,
     layers: [
-        L.tileLayer("https://{s}.tile.openstreetmap.org{z}/{x}/{y}.png")
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
 });
 
