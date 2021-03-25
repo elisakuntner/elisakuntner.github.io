@@ -1,6 +1,6 @@
 // console.log("Hello World");
 // console.log(L);
-const map = L.map("map"), {
+const map = L.map("map",{
     center: [ -40.50, 172.54 ], //coordinaten einfügen
     zoom: 13,
     layers: [
