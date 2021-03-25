@@ -17,9 +17,15 @@ const map = L.map("map",{
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
 });
+
+let nav = document.querySelector("#navigation");
 console.log(ROUTE);
-for (let entry of ROUTE){
-    console.log(entry);
+for (let entry of ROUTE){    
+    //console.log(entry);
+
+    nav.innerHTML += `
+       <option value="${entry.user}">${entry.name}</option>
+    `;
 
     let mrk = L.marker([entry.lat, entry.lng ]).addTo(map);
     mrk.bindPopup(`
