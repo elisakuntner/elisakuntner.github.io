@@ -23,4 +23,4 @@ let mrk = L.marker([stop.lat, stop.lng ]); addTo(map);
 mrk.bindPopup("Abel Tasman National Park").openPopup();
 
 
-// console.log(document.querySelector("#map"))
+console.log(document.querySelector("#map"))
