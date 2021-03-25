@@ -17,8 +17,9 @@ const map = L.map("map",{
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
 });
+console.log(ROUTE);
 
-let mrk = L.marker([stop.lat, stop.lng ]); addTo(map);
+let mrk = L.marker([stop.lat, stop.lng ]).addTo(map);
 mrk.bindPopup(`
     <h4>Stop ${stop.nr}: ${stop.name}</h4>
     <p><i class="fas fa-external-link-alt mr-3"></i><a href="${stop.wikipedia}">Read about stop in Wikipedida</a></p>
