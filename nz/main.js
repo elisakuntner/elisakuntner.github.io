@@ -8,8 +8,8 @@ const map = L.map("map"), {
     ]
 });
 
-let mrk = L.marker([-40.50, 172.54 ]); add
+let mrk = L.marker([-40.50, 172.54 ]); addTo(map);
+mrk.bindPopup("Abel Tasman National Park"); //
 
 
 // console.log(document.querySelector("#map"))
-//Abel-Tasman-Nationalpark
