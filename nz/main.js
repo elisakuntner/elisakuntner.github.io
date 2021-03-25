@@ -11,8 +11,8 @@ let stop = {
 }
 
 const map = L.map("map",{
-    center: [ stop.lat, stop.lng ], //coordinaten einfügen
-    zoom: 13,
+    //center: [ stop.lat, stop.lng ], //coordinaten einfügen. kann ich hier auskommentieren, weil in Z31
+    //zoom: 13,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
@@ -28,6 +28,7 @@ for (let entry of ROUTE){
         `); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den bakc ``machen.
         
         if (CustomElementRegistry.nr == 18) {
+            map.setView([entry.lat, entry.lng], 13);
             mrk.openPopup();
         }
 }
