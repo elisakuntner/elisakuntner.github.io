@@ -27,7 +27,7 @@ for (let entry of ROUTE){
         <p><a href="${entry.wikipedia}">i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedida</a></p>
         `); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den bakc ``machen.
         
-        if (CustomElementRegistry.nr == 22) {
+        if (CustomElementRegistry.nr == 18) {
             mrk.openPopup();
         }
 }
