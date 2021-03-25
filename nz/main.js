@@ -42,4 +42,14 @@ for (let entry of ROUTE){
         }
 }
 
-console.log(document.querySelector("#map"));
+
+nav.onchange = (evt) => {
+    let selected = evt.target.selectedIndex;
+    let options = evt.target.options;
+
+    let value =  options[selected].value;
+    console.log(value); //ist von der nummerierung her eins weniger als vom beginn. mit 0
+
+};
+
+//console.log(document.querySelector("#map"));
