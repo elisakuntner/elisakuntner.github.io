@@ -1,7 +1,3 @@
-ROUTE.sort((stop1, stop2) => {
-    return stop1.nr > stop2.nr
-});
-
 nav.onchange = (evt) => {
     let selected = evt.target.selectedIndex;
     let options = evt.target.options;
