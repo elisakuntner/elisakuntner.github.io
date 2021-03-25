@@ -24,8 +24,8 @@ for (let entry of ROUTE){
     let mrk = L.marker([entry.lat, entry.lng ]).addTo(map);
     mrk.bindPopup(`
         <h4>Stop ${entry.nr}: ${entry.name}</h4>
-        <p><a href="${entry.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p>
-        `); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den bakc ``machen.
+        <p><a href="${entry.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p> 
+        `); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den back ``machen.
         
         if (entry.nr == 18) {
             map.setView([entry.lat, entry.lng], 13);
