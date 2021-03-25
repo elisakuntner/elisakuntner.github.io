@@ -4,7 +4,7 @@ let stop = {
     nr: 18,
     name: "Abel Tasman National Park",
     lat: -40.833333, 
-    lng: 172.9
+    lng: 172.9,
     user: "elisakuntner",
     wikipedia: "https://en.wikipedia.org/wiki/Abel_Tasman_National_Park"
 
