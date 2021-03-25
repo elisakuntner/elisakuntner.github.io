@@ -18,12 +18,14 @@ const map = L.map("map",{
     ]
 });
 console.log(ROUTE);
+for (let entry of ROUTE){
+    console.log(entry);
 
-let mrk = L.marker([stop.lat, stop.lng ]).addTo(map);
-mrk.bindPopup(`
-    <h4>Stop ${stop.nr}: ${stop.name}</h4>
-    <p><i class="fas fa-external-link-alt mr-3"></i><a href="${stop.wikipedia}">Read about stop in Wikipedida</a></p>
-    `).openPopup(); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den bakc ``machen.
-
+    let mrk = L.marker([entry.lat, entry.lng ]).addTo(map);
+    mrk.bindPopup(`
+        <h4>Stop ${entry.nr}: ${entry.name}</h4>
+        <p><i class="fas fa-external-link-alt mr-3"></i><a href="${entry.wikipedia}">Read about stop in Wikipedida</a></p>
+        `).openPopup(); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den bakc ``machen.
+}
 
 console.log(document.querySelector("#map"));
