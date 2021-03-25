@@ -20,6 +20,9 @@ const map = L.map("map",{
 
 let nav = document.querySelector("#navigation");
 console.log(ROUTE);
+ROUTE.sort((stop1, stop2) => {
+    return stop1.nr > stop2.nr //mit größer kl zeichen, so sortiert er aufsteigend
+}) //sortiert die elemente vom dropdownmenü
 for (let entry of ROUTE){    
     //console.log(entry);
 
