@@ -1,3 +1,15 @@
+ROUTE.sort((stop1, stop2) => {
+    return stop1.nr > stop2.nr
+});
+
+nav.onchange = (evt) => {
+    let selected = evt.target.selectedIndex;
+    let options = evt.target.options;
+    let username =options[selected].value;
+    let link = `https://${username}.github.io/nz/index.html`;
+    console.log(username, link);
+};
+
 const ROUTE = [{
     nr: 2,
     name: "Lake Tekapo",
@@ -54,6 +66,13 @@ const ROUTE = [{
     lng: 166.983333,
     user: "annakarolinv",
     wikipedia: "https://en.wikipedia.org/wiki/Doubtful_Sound_/_Patea"
+}, {
+    nr: 19,
+    name: "Picton",
+    lat: -41.293056,
+    lng: 174.001944,
+    user: "maximilianender",
+    wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
 }, {
     nr: 20,
     name: "Wellington",
@@ -152,13 +171,6 @@ const ROUTE = [{
     lng: 176.251389,
     user: "jo3093",
     wikipedia: "https://en.wikipedia.org/wiki/Champagne_Pool"
-}, {
-    nr: 19,
-    name: "Picton",
-    lat: -41.293056,
-    lng: 174.001944,
-    user: "maximilianender",
-    wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
 }, {
     nr: 18,
     name: "Abel Tasman National Park",
