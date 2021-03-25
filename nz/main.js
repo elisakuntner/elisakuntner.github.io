@@ -10,7 +10,6 @@ let stop = {
 
 }
 
-
 const map = L.map("map",{
     center: [ stop.lat, stop.lng ], //coordinaten einfügen
     zoom: 13,
@@ -20,7 +19,10 @@ const map = L.map("map",{
 });
 
 let mrk = L.marker([stop.lat, stop.lng ]); addTo(map);
-mrk.bindPopup("Abel Tasman National Park").openPopup();
+mrk.bindPopup(`
+    <h4>Stop ${stop.nr}: ${stop.name}</h4>
+    <p>>a href="${stop.wikipedia}">Read about stop in Wikipedida</a></p>
+    `).openPopup(); //mit diesen marken kann man gut übersichtlich arbeiten.. aber ohne autocomplet, kann man ev ausserhalb von den bakc ``machen.
 
 
-console.log(document.querySelector("#map"))
+console.log(document.querySelector("#map"));
