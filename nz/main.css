@@ -92,7 +92,9 @@ footer {
 @media screen and (max-width:900px) {
     main {
         max-width: 90%;
-
+    }
+    figure img {
+        width: 100%;
     }
 }
 
