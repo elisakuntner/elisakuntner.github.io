@@ -43,7 +43,10 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
             <h3>${station.properties.name}</h3>
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</l>
-                <li>Temperatur:${station.properties.LT} C</l>i
+                <li>Temperatur:${station.properties.LT} C</li>
+                <li>Luftfeuchtigkeit:${station.properties.RH} </li>
+                <li>Schneehöhe:${station.properties.HS} </li>
+                <li>Seehöhe:${station.properties.} </li>
             </ul>
             `);
             marker.addTo(awsLayer); //marker zur karte fügen
