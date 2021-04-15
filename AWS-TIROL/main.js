@@ -8,7 +8,7 @@ let map = L.map("map", {
     ]
 });
 
-let layerConrol = L.control.layers({ //runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
+let layerControl = L.control.layers({ //runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
     "BasemapAT.orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
     "BasemapAT.surface": L.tileLayer.provider("BasemapAT.surface"),
@@ -21,6 +21,12 @@ let layerConrol = L.control.layers({ //runde klammer für die funktion die ausge
 
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson" //wetterstationen daten aus dem link runterladen
+
+//ffeature gruppe erstellen
+let awsLayer = L.featureGroup(); //aus leafletbib eine funktion
+layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
+
+
 fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
 .then(response => response.json())//gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
     .then(json => {  //damit ruf ich es dann auf kann mit dem json weiterarbeiten 
