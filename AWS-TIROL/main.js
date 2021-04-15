@@ -12,23 +12,24 @@ let layerControl = L.control.layers({ //runde klammer für die funktion die ausg
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
     "BasemapAT.orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
     "BasemapAT.surface": L.tileLayer.provider("BasemapAT.surface"),
-    "BasemapAT.overlay": L.tileLayer.provider("BasemapAT.overlay"), //geht gut zum kombinieren mit dem orthofoto
-    "BasemapAT.overlay+ortho": L.layerGroup([
+    "BasemapAT.overlay+ortho": L.layerGroup([  //kombinieren
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay"),
     ])  //zum kombinieren basislayer --> layergroup über    
 }) .addTo(map);//jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
 
 
-let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson" //wetterstationen daten aus dem link runterladen
+let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
-//feature gruppe erstellen
+//feature gruppen erstellen
 let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
 //awsLayer.addto(map); //damit werden die layer der stationen von anfang an eingeblendet.
 let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhen")
-//ZEILE FEHLT:::::::
+snowLayer.addTo(map);
+
+layerControl.addOverlay(awsLayer, "Windgeschwindigkeiten");
 
 fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
     .then(response => response.json())//gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
@@ -75,7 +76,7 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
                 ] {
                     icon: snowIcon
                 });
-                snowMarker.addTo(snowLayer); //kann jetzt filtern zwischen station mit schnee und ohne schneelayer.. 
+                snowMarker.addTo(snowLayer); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
         }
         
