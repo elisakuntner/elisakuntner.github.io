@@ -94,7 +94,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                     });
                     let windMarker = L.marker([
                         station.geometry.coordinates[1],
-                        station.geometry.coordinates[0],
+                        station.geometry.coordinates[0]
                     ], {
                         icon: windIcon
                     });
