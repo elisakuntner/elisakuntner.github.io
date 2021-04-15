@@ -22,10 +22,10 @@ let layerControl = L.control.layers({ //runde klammer für die funktion die ausg
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson" //wetterstationen daten aus dem link runterladen
 
-//ffeature gruppe erstellen
-let awsLayer = L.featureGroup(); //aus leafletbib eine funktion
+//feature gruppe erstellen
+let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
-
+awsLayer.addto(map); //damit werden die layer der stationen von anfang an eingeblendet.
 
 fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
 .then(response => response.json())//gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
