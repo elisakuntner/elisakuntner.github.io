@@ -43,11 +43,11 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
             <ul>
-                <li>Datum: ${formattedDate.toLocaleString("de")}</l>
+                <li>Datum: ${formattedDate.toLocaleString("de")}</li>
                 <li>Seehöhe:${station.geometry.coordinates[2]} m</li>
                 <li>Temperatur:${station.properties.LT || "?"} C</li>
                 <li>Luftfeuchtigkeit:${station.properties.RH || "?"} </li>
-                <li>Schneehöhe:${station.properties.HS || "?"} </li>
+                <li>Schneehöhe:${station.properties.HS || "?"} cm</li>
                 <li>Windgeschwindigkeit:${station.properties.WG || "?"} km/h</li>
                 <li>Windrichtung:${station.properties.WR || "?"} </li>
             </ul>
