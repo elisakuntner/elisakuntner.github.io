@@ -43,7 +43,7 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
             <h3>${station.properties.name}</h3>
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</l>
-                <li>Seehöhe:${station} m</li>
+                <li>Seehöhe:${station.geometry.ccoordinates[2]} m</li>
                 <li>Temperatur:${station.properties.LT} C</li>
                 <li>Luftfeuchtigkeit:${station.properties.RH} </li>
                 <li>Schneehöhe:${station.properties.HS} </li>
