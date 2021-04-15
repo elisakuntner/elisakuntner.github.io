@@ -26,9 +26,10 @@ let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson" //wettersta
 let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
 awsLayer.addto(map); //damit werden die layer der stationen von anfang an eingeblendet.
+let snowLayer = L.featureGroup();
 
 fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
-.then(response => response.json())//gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
+    .then(response => response.json())//gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
     .then(json => {  //damit ruf ich es dann auf kann mit dem json weiterarbeiten 
         console.log("Daten geladen: ", json); //printn
         for (station of json.features) {
@@ -54,6 +55,17 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
             marker.addTo(awsLayer); //marker zur karte fügen
+            //abfragen ob wert zur schneehöhe vorhanden ist:
+            if  (station.properties.HS) {
+                let snowIcon = L.divIcon({
+                    html: `<div>XXXirgendwasXXX</div>`
+                })
+                let snowMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0],
+                ]);
+                snowMarker.addTo(snowLayer); //kann jetzt filtern zwischen station mit schnee und ohne schneelayer.. 
+            }
         }
         
         //set map view to all stations
