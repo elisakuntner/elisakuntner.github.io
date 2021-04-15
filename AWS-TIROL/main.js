@@ -26,7 +26,7 @@ let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich 
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
 //awsLayer.addto(map); //damit werden die layer der stationen von anfang an eingeblendet.
 let snowLayer = L.featureGroup();
-layerControl.addOverlay(snowLayer, "Schneehöhen")
+layerControl.addOverlay(snowLayer, "Schneehöhen(cm)");
 snowLayer.addTo(map);
 
 layerControl.addOverlay(awsLayer, "Windgeschwindigkeiten");
@@ -34,14 +34,14 @@ layerControl.addOverlay(awsLayer, "Windgeschwindigkeiten");
 fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
     .then(response => response.json())//gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
     .then(json => {  //damit ruf ich es dann auf kann mit dem json weiterarbeiten 
-        console.log("Daten geladen: ", json); //printn
+        console.log("Daten konvertiert: ", json); //printn
         for (station of json.features) {
-            console.log("Station: ", station); //kriege für jede station einen eintrag.
-            let marker = L.marker( //marker setzen
-                [station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
+            //console.log("Station: ", station); //kriege für jede station einen eintrag.
+            let marker = L.marker([ //marker setzen
+                station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
                 station.geometry.coordinates[0]
             ]);
-            let foramttedDate = new Date(station.properties.date); 
+            let formattedDate = new Date(station.properties.date); 
             
             //popup mit marker infos erstellen: 
             marker.bindPopup(`
@@ -68,18 +68,37 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
 
                 }
                 let snowIcon = L.divIcon({
-                    html: `<div class="snow-label">${station.properties.HS}</div>` //schneehöhe steht da af dr kort
+                    html: `<div class="snow-label">${highlightClass}>${station.properties.HS}</div>` //schneehöhe steht da af dr kort
                 })
                 let snowMarker = L.marker([
                     station.geometry.coordinates[1],
                     station.geometry.coordinates[0],
-                ] {
+                ], {
                     icon: snowIcon
                 });
                 snowMarker.addTo(snowLayer); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
+            
+            if  (station.properties.HWG) {
+                let highlightClass = "";
+                if (station.properties.WG > 100) {
+                    highlightClass = "wind-100";
+                if (station.properties.WG > 200) {
+                    highlightClass = "wind-200";
+                }
+                let windIcon = L.divIcon({
+                    html: `<div class="snow-label">${station.properties.WG}</div>`
+                })
+                let windMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0],
+                ], {
+                    icon: windIcon
+                });
+                windMarker.addTo(windLayer);
+                
+            }
         }
-        
         //set map view to all stations
         map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
-});
+    });
