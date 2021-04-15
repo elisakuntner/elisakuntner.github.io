@@ -29,8 +29,9 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
             console.log("Station: ", station); //kriege für jede station einen eintrag.
             let marker = L.marker( //marker setzen
                 [station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
-                station.geometry.coordinates[0]]
-                );
+                station.geometry.coordinates[0]
+            ]);
+            marker.bindPopup(`<h3>${station.properties.name}</h3>`);
             marker.addTo(map); //marker zur karte fügen
         }
 });
