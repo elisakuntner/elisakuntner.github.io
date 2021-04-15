@@ -38,7 +38,8 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
                 station.geometry.coordinates[0]
             ]);
             let foramttedDate = new Date(station.properties.date); 
-
+            
+            //popup mit marker infos erstellen: 
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
             <ul>
@@ -50,6 +51,7 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
                 <li>Windgeschwindigkeit:${station.properties.WG || "?"} km/h</li>
                 <li>Windrichtung:${station.properties.WR || "?"} </li>
             </ul>
+            <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
             marker.addTo(awsLayer); //marker zur karte fügen
         }
