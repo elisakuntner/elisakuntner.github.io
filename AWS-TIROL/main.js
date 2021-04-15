@@ -74,7 +74,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
 
                     let snowMarker = L.marker([
                         station.geometry.coordinates[1],
-                        station.geometry.coordinates[0],
+                        station.geometry.coordinates[0]
                     ], {
                         icon: snowIcon
                     });
@@ -90,7 +90,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                         windHighlightClass = "wind-20";
                     }
                     let windIcon = L.divIcon({
-                        html: `<div class="wind-label $windHighlightClass}" ${station.properties.WG}</div>`,
+                        html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`,
                     });
                     let windMarker = L.marker([
                         station.geometry.coordinates[1],
