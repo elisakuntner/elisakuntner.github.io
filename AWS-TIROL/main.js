@@ -38,6 +38,9 @@ fetch(awsUrl)//Neuer js befehl zum daten laden aus URL.
                 station.geometry.coordinates[0]
             ]);
             marker.bindPopup(`<h3>${station.properties.name}</h3>`);
-            marker.addTo(map); //marker zur karte fügen
+            marker.addTo(awsLayer); //marker zur karte fügen
         }
+        
+        //set map view to all stations
+        map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
 });
