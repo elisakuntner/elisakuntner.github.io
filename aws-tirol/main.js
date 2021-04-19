@@ -30,7 +30,7 @@ layerControl.addOverlay(snowLayer, "Schneehöhen(cm)");
 //snowLayer.addTo(map);
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeiten (km/h)");
-windLayer.addTo(map);
+//windLayer.addTo(map); //wird beim Website öffnen eingeblendet/ ist aktiviert
 //temperaturlayer
 let temperaturLayer = L.featureGroup();
 layerControl.addOverlay(temperaturLayer, "Lufttemperatur (°C)");
