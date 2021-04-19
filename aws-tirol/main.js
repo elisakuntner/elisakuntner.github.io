@@ -31,6 +31,9 @@ layerControl.addOverlay(snowLayer, "Schneehöhen(cm)");
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeiten (km/h)");
 windLayer.addTo(map);
+//temperaturlayer
+let temperaturLayer = L.featureGroup();
+layerControl.addOverlay(termperaturLayer, "Lufttemperatur (°C)");
 
 fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertieren in json
     .then(response => response.json()) //gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
