@@ -105,10 +105,10 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 if (station.properties.LT) {
                     let temperaturHighlightClass = "";
                     if (station.properties.LT <= 0) {
-                        temperaturHighlightClass = "temperatur<=0";
+                        temperaturHighlightClass = "temperatur-kl0";
                     }
                     if (station.properties.LT > 0) {
-                        temperaturHighlightClass = "temperatur>0";
+                        temperaturHighlightClass = "temperatur-gr0";
                     }
                     let temperaturIcon = L.divIcon({
                         html: `<div class="temperatur-label ${temperaturHighlightClass}">${station.properties.LT}</div>`,
