@@ -100,6 +100,27 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                     });
                     windMarker.addTo(windLayer);
                 }
+
+
+                if (station.properties.LT) {
+                    let temperaturHighlightClass = "";
+                    if (station.properties.LT <= 0) {
+                        temperaturHighlightClass = "temperatur<=0";
+                    }
+                    if (station.properties.LT > 0) {
+                        temperaturHighlightClass = "temperatur>0";
+                    }
+                    let temperaturIcon = L.divIcon({
+                        html: `<div class="temperatur-label ${temperaturHighlightClass}">${station.properties.LT}</div>`,
+                    });
+                    let temperaturMarker = L.marker([
+                        station.geometry.coordinates[1],
+                        station.geometry.coordinates[0]
+                    ], {
+                        icon: temperaturIcon
+                    });
+                    temperaturMarker.addTo(temperaturLayer);
+                }
             }
             //set map view to all stations
             map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
