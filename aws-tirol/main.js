@@ -42,18 +42,18 @@ temperaturLayer.addTo(map);
 fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertieren in json
     .then(response => response.json()) //gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
     .then(json => { //damit ruf ich es dann auf kann mit dem json weiterarbeiten 
-            console.log("Daten konvertiert: ", json); //printn
-            for (station of json.features) {
-                //console.log("Station: ", station); //kriege für jede station einen eintrag.
-                //https://leafletjs.com/reference-1.7.1.html#marker
-                let marker = L.marker([ //marker setzen
-                    station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
-                    station.geometry.coordinates[0]
-                ]);
-                let formattedDate = new Date(station.properties.date);
+        console.log("Daten konvertiert: ", json); //printn
+        for (station of json.features) {
+            //console.log("Station: ", station); //kriege für jede station einen eintrag.
+            //https://leafletjs.com/reference-1.7.1.html#marker
+            let marker = L.marker([ //marker setzen
+                station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
+                station.geometry.coordinates[0]
+            ]);
+            let formattedDate = new Date(station.properties.date);
 
-                //popup mit marker infos erstellen: 
-                marker.bindPopup(`
+            //popup mit marker infos erstellen: 
+            marker.bindPopup(`
             <h3>${station.properties.name}</h3>
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
@@ -66,71 +66,71 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
-                marker.addTo(awsLayer); //marker zur karte fügen
-                //abfragen ob wert zur schneehöhe vorhanden ist:
-                if (station.properties.HS) {
-                    let highlightClass = "";
-                    if (station.properties.HS > 100) {
-                        highlightClass = "snow-100";
-                    }
-                    if (station.properties.HS > 200) {
-                        highlightClass = "snow-200";
-                    }
-                    //https://leafletjs.com/reference-1.7.1.html#icon
-                    let snowIcon = L.divIcon({
-                        html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>` //schneehöhe steht da af dr kort
-                    })
-
-                    let snowMarker = L.marker([
-                        station.geometry.coordinates[1],
-                        station.geometry.coordinates[0]
-                    ], {
-                        icon: snowIcon
-                    });
-                    snowMarker.addTo(snowLayer); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
+            marker.addTo(awsLayer); //marker zur karte fügen
+            //abfragen ob wert zur schneehöhe vorhanden ist:
+            if (station.properties.HS) {
+                let highlightClass = "";
+                if (station.properties.HS > 100) {
+                    highlightClass = "snow-100";
                 }
-
-                if (station.properties.WG) {
-                    let windHighlightClass = "";
-                    if (station.properties.WG > 10) {
-                        windHighlightClass = "wind-10";
-                    }
-                    if (station.properties.WG > 20) {
-                        windHighlightClass = "wind-20";
-                    }
-                    let windIcon = L.divIcon({
-                        html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`,
-                    });
-                    let windMarker = L.marker([
-                        station.geometry.coordinates[1],
-                        station.geometry.coordinates[0]
-                    ], {
-                        icon: windIcon
-                    });
-                    windMarker.addTo(windLayer);
+                if (station.properties.HS > 200) {
+                    highlightClass = "snow-200";
                 }
+                //https://leafletjs.com/reference-1.7.1.html#icon
+                let snowIcon = L.divIcon({
+                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>` //schneehöhe steht da af dr kort
+                })
 
-
-                if (station.properties.LT) {
-                    let temperaturHighlightClass = "";
-                    if (station.properties.LT <= 0) {
-                        temperaturHighlightClass = "temperatur-kl0";
-                    }
-                    if (station.properties.LT > 0) {
-                        temperaturHighlightClass = "temperatur-gr0";
-                    }
-                    let temperaturIcon = L.divIcon({
-                        html: `<div class="temperatur-label ${temperaturHighlightClass}">${station.properties.LT}</div>`,
-                    });
-                    let temperaturMarker = L.marker([
-                        station.geometry.coordinates[1],
-                        station.geometry.coordinates[0]
-                    ], {
-                        icon: temperaturIcon
-                    });
-                    temperaturMarker.addTo(temperaturLayer);
-                }
+                let snowMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: snowIcon
+                });
+                snowMarker.addTo(snowLayer); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
-            //set map view to all stations
-            map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
-        });
+
+            if (station.properties.WG) {
+                let windHighlightClass = "";
+                if (station.properties.WG > 10) {
+                    windHighlightClass = "wind-10";
+                }
+                if (station.properties.WG > 20) {
+                    windHighlightClass = "wind-20";
+                }
+                let windIcon = L.divIcon({
+                    html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`,
+                });
+                let windMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: windIcon
+                });
+                windMarker.addTo(windLayer);
+            }
+
+
+            if (station.properties.LT) {
+                let temperaturHighlightClass = "";
+                if (station.properties.LT <= 0) {
+                    temperaturHighlightClass = "temperatur-kl0";
+                }
+                if (station.properties.LT > 0) {
+                    temperaturHighlightClass = "temperatur-gr0";
+                }
+                let temperaturIcon = L.divIcon({
+                    html: `<div class="temperatur-label ${temperaturHighlightClass}">${station.properties.LT}</div>`,
+                });
+                let temperaturMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: temperaturIcon
+                });
+                temperaturMarker.addTo(temperaturLayer);
+            }
+        }
+        //set map view to all stations
+        map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
+    });
