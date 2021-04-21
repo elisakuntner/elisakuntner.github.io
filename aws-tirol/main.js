@@ -1,5 +1,6 @@
+//https://leafletjs.com/reference-1.7.1.html#tilelayer
 let basemapGray = L.tileLayer.provider("BasemapAT.grau"); //das vom plugin dings rauskopieren. 
-
+//https://leafletjs.com/reference-1.7.1.html#map-example
 let map = L.map("map", {
     center: [47, 11],
     zoom: 9,
@@ -8,10 +9,12 @@ let map = L.map("map", {
     ]
 });
 
+//https://leafletjs.com/reference-1.7.1.html#control-layers
 let layerControl = L.control.layers({ //basiskarten schaten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
     "BasemapAT.orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
     "BasemapAT.surface": L.tileLayer.provider("BasemapAT.surface"),
+    //https://leafletjs.com/reference-1.7.1.html#layergroup
     "BasemapAT.overlay+ortho": L.layerGroup([ //kombinieren
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay")
@@ -21,7 +24,7 @@ let layerControl = L.control.layers({ //basiskarten schaten oben in ecke .runde 
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
-//feature gruppen erstellen
+//feature gruppen erstellen // https://leafletjs.com/reference-1.7.1.html#featuregroup
 let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
 //awsLayer.addto(map); //damit werden die layer der stationen von anfang an eingeblendet.
@@ -42,6 +45,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             console.log("Daten konvertiert: ", json); //printn
             for (station of json.features) {
                 //console.log("Station: ", station); //kriege für jede station einen eintrag.
+                //https://leafletjs.com/reference-1.7.1.html#marker
                 let marker = L.marker([ //marker setzen
                     station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
                     station.geometry.coordinates[0]
@@ -72,6 +76,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                     if (station.properties.HS > 200) {
                         highlightClass = "snow-200";
                     }
+                    //https://leafletjs.com/reference-1.7.1.html#icon
                     let snowIcon = L.divIcon({
                         html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>` //schneehöhe steht da af dr kort
                     })
