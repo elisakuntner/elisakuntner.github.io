@@ -10,7 +10,7 @@ let map = L.map("map", {
 });
 
 //https://leafletjs.com/reference-1.7.1.html#control-layers
-let layerControl = L.control.layers({ //basiskarten schaten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
+let layerControl = L.control.layers({ //zum basiskarten schaten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
     "BasemapAT.orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
     "BasemapAT.surface": L.tileLayer.provider("BasemapAT.surface"),
@@ -27,20 +27,20 @@ let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterst
 //feature gruppen erstellen // https://leafletjs.com/reference-1.7.1.html#featuregroup
 let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
-//awsLayer.addto(map); //damit werden die layer der stationen von anfang an eingeblendet.
+//awsLayer.addto(map); 
 let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhen(cm)");
 //snowLayer.addTo(map);
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeiten (km/h)");
-//windLayer.addTo(map); //wird beim Website öffnen eingeblendet/ ist aktiviert
+//windLayer.addTo(map); //wird beim Website öffnen eingeblendet/ ist aktiviert mit addTo(map)
 //temperaturlayer
 let temperaturLayer = L.featureGroup();
 layerControl.addOverlay(temperaturLayer, "Lufttemperatur (°C)");
 temperaturLayer.addTo(map);
 
 fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertieren in json
-    .then(response => response.json()) //gibt oft probelme deswegen: mit them then verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
+    .then(response => response.json()) //gibt oft probelme deswegen: mit "then" verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
     .then(json => { //damit ruf ich es dann auf kann mit dem json weiterarbeiten 
         console.log("Daten konvertiert: ", json); //printn
         for (station of json.features) {
