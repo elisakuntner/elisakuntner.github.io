@@ -67,27 +67,28 @@ let newLabel = (coords, options) => {
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
-let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
-fetch(awsUrl)
-    .then(response => response.json())
-    .then(json => {
-        console.log('Daten konvertiert: ', json);
+fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertieren in json
+    .then(response => response.json()) //gibt oft probelme deswegen: mit "then" verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
+    .then(json => { //damit ruf ich es dann auf kann mit dem json weiterarbeiten 
+        console.log("Daten konvertiert: ", json); //printn
         for (station of json.features) {
-            // console.log('Station: ', station);
-            let marker = L.marker([
-                station.geometry.coordinates[1],
+            //console.log("Station: ", station); //kriege für jede station einen eintrag.
+            //https://leafletjs.com/reference-1.7.1.html#marker
+            let marker = L.marker([ //marker setzen
+                station.geometry.coordinates[1], //länge als zweites und breite als erstes dswegn 0 u 1 weil des do umgetauscht ist
                 station.geometry.coordinates[0]
             ]);
             let formattedDate = new Date(station.properties.date);
+            //popup mit marker infos erstellen: 
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
             <ul>
-              <li>Datum: ${formattedDate.toLocaleString("de")}</li>
-              <li>Seehöhe: ${station.geometry.coordinates[2]} m</li>
-              <li>Temperatur: ${station.properties.LT} C</li>
-              <li>Schneehöhe: ${station.properties.HS || '?'} cm</li>
-              <li>Windgeschwindigkeit: ${station.properties.WG || '?'} km/h</li>
-              <li>Windrichtung: ${station.properties.WR || '?'}</li>
+                <li>Datum: ${formattedDate.toLocaleString("de")}</li>
+                <li>Seehöhe:${station.geometry.coordinates[2]} m</li>
+                <li>Temperatur:${station.properties.LT} C</li>
+                <li>Schneehöhe:${station.properties.HS || "?"} cm</li>
+                <li>Windgeschwindigkeit:${station.properties.WG || "?"} km/h</li>
+                <li>Windrichtung:${station.properties.WR || "?"} </li>
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
