@@ -9,7 +9,6 @@ let map = L.map("map", {
     ]
 });
 
-
 let overlays = {
     stations: L.featureGroup(), //kann hier overlay objekte definieren definieren. besteht aus: key value pairs + einer feature group
     temperature: L.featureGroup(),
@@ -73,7 +72,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             `);
             marker.addTo(awsLayer); //marker zur karte fügen
             //abfragen ob wert zur schneehöhe vorhanden ist:
-            if (station.properties.HS) {
+            if (typeof station.properties.HS == "number") {
                 let highlightClass = "";
                 if (station.properties.HS > 100) {
                     highlightClass = "snow-100";
@@ -95,7 +94,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 snowMarker.addTo(snowLayer); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
 
-            if (station.properties.WG) {
+            if (typeof station.properties.WG == "number") {
                 let windHighlightClass = "";
                 if (station.properties.WG > 10) {
                     windHighlightClass = "wind-10";
@@ -116,25 +115,27 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             }
 
 
-            if (station.properties.LT) {
-                let temperatureHighlightClass = "";
-                if (station.properties.LT <= 0) {
-                    temperatureHighlightClass = "temperature-kl0";
-                }
-                if (station.properties.LT > 0) {
-                    temperatureHighlightClass = "temperature-gr0";
-                }
-                let temperatureIcon = L.divIcon({
-                    html: `<div class="temperature-label ${temperatureHighlightClass}">${station.properties.LT}</div>`,
-                });
-                let temperatureMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: temperatureIcon
-                });
-                temperatureMarker.addTo(temperatureLayer);
+            if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
+                console.log(station.properties.LT)
             }
+                let temperatureHighlightClass = "";
+            //     if (station.properties.LT <= 0) {
+            //         temperatureHighlightClass = "temperature-kl0";
+            //     }
+            //     if (station.properties.LT > 0) {
+            //         temperatureHighlightClass = "temperature-gr0";
+            //     }
+            //     let temperatureIcon = L.divIcon({
+            //         html: `<div class="temperature-label ${temperatureHighlightClass}">${station.properties.LT}</div>`,
+            //     });
+            //     let temperatureMarker = L.marker([
+            //         station.geometry.coordinates[1],
+            //         station.geometry.coordinates[0]
+            //     ], {
+            //         icon: temperatureIcon
+            //     });
+            //     temperatureMarker.addTo(temperatureLayer);
+            // }
         }
         //set map view to all stations
         map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
