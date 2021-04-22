@@ -87,10 +87,8 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
             marker.addTo(overlay.stations); //marker zur karte fügen
-            
             //abfragen ob wert zur schneehöhe vorhanden ist:
-            if (typeof station.properties.HS == "number") {
-                if (typeof  station.properties.HS == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
+            if (typeof station.properties.HS == "number") { //überprüfene ob es eine nummr ist
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.HS,
                         colors: COLORS.snowheight
@@ -100,7 +98,6 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             }
 
             if (typeof station.properties.WG == "number") {
-                if (typeof  station.properties.WG == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.WG,
                         colors: COLORS.windspeed
