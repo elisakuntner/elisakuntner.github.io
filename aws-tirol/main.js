@@ -90,7 +90,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                         value: station.properties.HS
                     });
                 //https://leafletjs.com/reference-1.7.1.html#divicon
-                snowMarker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
+                marker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
 
             if (typeof station.properties.WG == "number") {
@@ -98,7 +98,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.WG
                     });
-                windMarker.addTo(overlays.windspeed);
+                marker.addTo(overlays.windspeed);
             }
             if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
                 let marker = newLabel(station.geometry.coordinates, {
