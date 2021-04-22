@@ -18,7 +18,7 @@ let overlays = {
     winddirection: L.featureGroup(),
 };
 //https://leafletjs.com/reference-1.7.1.html#control-layers
-let layerControl = L.control.layers({ //zum basiskarten schaten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
+let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
     "BasemapAT.orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
     "BasemapAT.surface": L.tileLayer.provider("BasemapAT.surface"),
@@ -31,9 +31,12 @@ let layerControl = L.control.layers({ //zum basiskarten schaten oben in ecke .ru
         "Wetterstationen in Tirol": overlays.stations,
         "Temperatur (°C):": overlays.temperature,
         "Windgeschwindigkeit, km/h": overlays.windspeed,
-        "Windrichtung": overlays.winddirection, 
+        "Windrichtung": overlays.winddirection,
+},{
+        collapsed=false
 }).addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
-overlays.temperature.addTo(map); 
+overlays.temperature.addTo(map);
+ 
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
