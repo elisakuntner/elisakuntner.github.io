@@ -102,7 +102,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 ], {
                     icon: snowIcon
                 });
-                snowMarker.addTo(snowLayer); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
+                snowMarker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
 
             if (typeof station.properties.WG == "number") {
@@ -122,7 +122,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 ], {
                     icon: windIcon
                 });
-                windMarker.addTo(windLayer);
+                windMarker.addTo(overlays.windspeed);
             }
 
 
@@ -150,7 +150,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 ], {
                     icon: temperatureIcon
                 });
-                temperatureMarker.addTo(temperatureLayer);
+                temperatureMarker.addTo(overlays.temperature);
             }
         }
         //set map view to all stations
