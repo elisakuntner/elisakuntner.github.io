@@ -41,6 +41,14 @@ L.control.scale({
     imperial: false //sonst zeigt es die anzeige auch noch mal in miles
 }).addTo(map);
 
+let newLabel = (coords, options) => {
+    console.log ("Koordinaten coords: ", coords);
+    console.log ("Optionsobjekt: ", obtions);
+    //Label erstellen
+    //den Label zurückgeben
+};
+
+
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
 fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertieren in json
@@ -117,26 +125,30 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
 
             if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
                 console.log(station.properties.LT)
-            }
+                newLabel(station.geometry.coordinates, {
+                    value: station.properties.LT
+                })
+            
                 let temperatureHighlightClass = "";
-            //     if (station.properties.LT <= 0) {
-            //         temperatureHighlightClass = "temperature-kl0";
-            //     }
-            //     if (station.properties.LT > 0) {
-            //         temperatureHighlightClass = "temperature-gr0";
-            //     }
-            //     let temperatureIcon = L.divIcon({
-            //         html: `<div class="temperature-label ${temperatureHighlightClass}">${station.properties.LT}</div>`,
-            //     });
-            //     let temperatureMarker = L.marker([
-            //         station.geometry.coordinates[1],
-            //         station.geometry.coordinates[0]
-            //     ], {
-            //         icon: temperatureIcon
-            //     });
-            //     temperatureMarker.addTo(temperatureLayer);
-            // }
+                if (station.properties.LT <= 0) {
+                    temperatureHighlightClass = "temperature-kl0";
+                }
+                if (station.properties.LT > 0) {
+                    temperatureHighlightClass = "temperature-gr0";
+                }
+                let temperatureIcon = L.divIcon({
+                    html: `<div class="temperature-label ${temperatureHighlightClass}">${station.properties.LT}</div>`,
+                });
+                let temperatureMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: temperatureIcon
+                });
+                temperatureMarker.addTo(temperatureLayer);
+            }
         }
         //set map view to all stations
         map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
     });
+
