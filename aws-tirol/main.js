@@ -85,14 +85,13 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
                 <li>Seehöhe:${station.geometry.coordinates[2]} m</li>
                 <li>Temperatur:${station.properties.LT} C</li>
-                <li>Luftfeuchtigkeit:${station.properties.RH || "?"} </li>
                 <li>Schneehöhe:${station.properties.HS || "?"} cm</li>
                 <li>Windgeschwindigkeit:${station.properties.WG || "?"} km/h</li>
                 <li>Windrichtung:${station.properties.WR || "?"} </li>
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
-            marker.addTo(overlay.stations); //marker zur karte fügen
+            marker.addTo(overlays.stations); //marker zur karte fügen
             //abfragen ob wert zur schneehöhe vorhanden ist:
             if (typeof station.properties.HS == "number") { //überprüfene ob es eine nummr ist
                     let marker = newLabel(station.geometry.coordinates, {
