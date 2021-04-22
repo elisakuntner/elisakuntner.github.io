@@ -42,7 +42,7 @@ L.control.scale({
 }).addTo(map);
 
 let getColor = (value, colorRamp) => {
-
+    console.log("Wert:", value, "Palette: ", colorRamp);
 };
 
 let newLabel = (coords, options) => {
