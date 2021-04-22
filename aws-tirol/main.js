@@ -31,29 +31,11 @@ let layerControl = L.control.layers({ //zum basiskarten schaten oben in ecke .ru
         "Wetterstationen in Tirol": overlays.stations,
         "Temperatur (°C):": overlays.temperature,
         "Windgeschwindigkeit, km/h": overlays.windspeed,
-        "Windrichtung": overlays.winddirection,
-        }  
-}) .addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
+        "Windrichtung": overlays.winddirection, 
+}).addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
+overlays.temperature.addTo(map); 
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
-
-
-
-
-//feature gruppen erstellen // https://leafletjs.com/reference-1.7.1.html#featuregroup
-let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
-layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); //zweiter parameter ist ein name
-//awsLayer.addto(map); 
-let snowLayer = L.featureGroup();
-layerControl.addOverlay(snowLayer, "Schneehöhen(cm)");
-//snowLayer.addTo(map);
-let windLayer = L.featureGroup();
-layerControl.addOverlay(windLayer, "Windgeschwindigkeiten (km/h)");
-//windLayer.addTo(map); //wird beim Website öffnen eingeblendet/ ist aktiviert mit addTo(map)
-//temperaturlayer
-let temperaturLayer = L.featureGroup();
-layerControl.addOverlay(temperaturLayer, "Lufttemperatur (°C)");
-temperaturLayer.addTo(map);
 
 fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertieren in json
     .then(response => response.json()) //gibt oft probelme deswegen: mit "then" verarbeiten, und dnn nochmal then. sit wei lman über internet (fehleranfällige leitung) laden, deswegen so kompliziert machen.
