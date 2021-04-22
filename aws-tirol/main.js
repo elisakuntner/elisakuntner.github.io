@@ -42,7 +42,7 @@ L.control.scale({
 }).addTo(map);
 
 let getColor = (value, colorRamp) => {
-    console.log("Wert:", value, "Palette: ", colorRamp);
+    //console.log("Wert:", value, "Palette: ", colorRamp);
     for (let rule of colorRamp) {
         if (value >= rule.min && value < rule.max) {
             return rule.col; //col weils im color.js so definiert ist neben min,max
@@ -52,9 +52,9 @@ let getColor = (value, colorRamp) => {
 };
 
 let newLabel = (coords, options) => {
-    let color = getColor(options.value, options.colors) // übergabe value und name..
+    let color = getColor(options.value, options.colors); // übergabe value und name..
     let label = L.divIcon({
-        html: `<div style="background-color:${color}>${options.value}</div>`,
+        html: `<div style="background-color:${color}">${options.value}</div>`,
         className: "text-label"
     })
     let marker = L.marker([coords[1], coords[0]], { //marker erstellen
@@ -78,7 +78,6 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 station.geometry.coordinates[0]
             ]);
             let formattedDate = new Date(station.properties.date);
-
             //popup mit marker infos erstellen: 
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
@@ -100,6 +99,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                         value: station.properties.HS,
                         colors: COLORS.snowheight,
                         station: station.properties.name
+                        
                     });
                 //https://leafletjs.com/reference-1.7.1.html#divicon
                     marker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
@@ -107,7 +107,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
 
             if (typeof station.properties.WG == "number") {
                     let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.WG,
+                        value: station.properties.WG.toFixed(0),
                         colors: COLORS.windspeed,
                         station: station.properties.name
                     });
@@ -115,7 +115,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             }
             if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.LT,
+                    value: station.properties.LT.toFixed(1),
                     colors: COLORS.temperature,
                     station: station.properties.name //übergebe an das label den namen derstation 
                 });
