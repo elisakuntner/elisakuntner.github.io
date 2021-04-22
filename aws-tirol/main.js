@@ -33,10 +33,14 @@ let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .r
         "Windgeschwindigkeit, km/h": overlays.windspeed,
         "Windrichtung": overlays.winddirection,
 },{
-        collapsed=false
+        collapsed: false
 }).addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
 overlays.temperature.addTo(map);
- 
+
+//Maßstab einbauen
+L.control.scale({
+    imperial: false //sonst zeigt es die anzeige auch noch mal in miles
+}).addTo(map);
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
