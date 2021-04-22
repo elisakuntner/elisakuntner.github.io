@@ -42,10 +42,16 @@ L.control.scale({
 }).addTo(map);
 
 let newLabel = (coords, options) => {
-    console.log ("Koordinaten coords: ", coords);
-    console.log ("Optionsobjekt: ", obtions);
-    let marker = L.marker ([coords[1], coords [0]]); //marker erstellen
-    console.log("Marker: ", marker);
+    let label = L.divIcon({
+        html: `<div>${options.value}</div>`,
+        classname: "text-label"
+    })
+    // console.log ("Koordinaten coords: ", coords);
+    // console.log ("Optionsobjekt: ", options);
+    // console.log("Marker: ", marker);
+    let marker = L.marker ([coords[1], coords [0]]; { //marker erstellen
+        icon: label
+    });
     return marker; //marker zurückliefern
     //Label erstellen
     //den Label zurückgeben
@@ -91,7 +97,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 if (station.properties.HS > 200) {
                     highlightClass = "snow-200";
                 }
-                //https://leafletjs.com/reference-1.7.1.html#icon
+                //https://leafletjs.com/reference-1.7.1.html#divicon
                 let snowIcon = L.divIcon({
                     html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>` //schneehöhe steht da af dr kort
                 })
