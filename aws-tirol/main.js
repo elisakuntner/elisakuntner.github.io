@@ -14,7 +14,7 @@ let overlays = {
     temperature: L.featureGroup(),
     snowheight: L.featureGroup(),
     windspeed: L.featureGroup(),
-    winddirection: L.featureGroup(),
+    winddirection: L.featureGroup()
 };
 //https://leafletjs.com/reference-1.7.1.html#control-layers
 let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
@@ -44,19 +44,13 @@ L.control.scale({
 let newLabel = (coords, options) => {
     let label = L.divIcon({
         html: `<div>${options.value}</div>`,
-        classname: "text-label"
+        className: "text-label"
     })
-    // console.log ("Koordinaten coords: ", coords);
-    // console.log ("Optionsobjekt: ", options);
-    // console.log("Marker: ", marker);
     let marker = L.marker ([coords[1], coords [0]], { //marker erstellen
         icon: label
     });
     return marker; //marker zurückliefern
-    //Label erstellen
-    //den Label zurückgeben
 };
-
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
 
@@ -87,79 +81,33 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
-            marker.addTo(awsLayer); //marker zur karte fügen
+            marker.addTo(overlay.stations); //marker zur karte fügen
+            
             //abfragen ob wert zur schneehöhe vorhanden ist:
             if (typeof station.properties.HS == "number") {
-                let highlightClass = "";
-                if (station.properties.HS > 100) {
-                    highlightClass = "snow-100";
-                }
-                if (station.properties.HS > 200) {
-                    highlightClass = "snow-200";
-                }
+                if (typeof  station.properties.HS == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
+                    let marker = newLabel(station.geometry.coordinates, {
+                        value: station.properties.HS
+                    });
                 //https://leafletjs.com/reference-1.7.1.html#divicon
-                let snowIcon = L.divIcon({
-                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>` //schneehöhe steht da af dr kort
-                })
-
-                let snowMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: snowIcon
-                });
                 snowMarker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
 
             if (typeof station.properties.WG == "number") {
-                let windHighlightClass = "";
-                if (station.properties.WG > 10) {
-                    windHighlightClass = "wind-10";
-                }
-                if (station.properties.WG > 20) {
-                    windHighlightClass = "wind-20";
-                }
-                let windIcon = L.divIcon({
-                    html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`,
-                });
-                let windMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: windIcon
-                });
+                if (typeof  station.properties.WG == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
+                    let marker = newLabel(station.geometry.coordinates, {
+                        value: station.properties.WG
+                    });
                 windMarker.addTo(overlays.windspeed);
             }
-
-
             if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
-                console.log(station.properties.LT)
-                newLabel(station.geometry.coordinates, {
+                let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT
                 });
-
-                marker.addTO(map);
-            
-                let temperatureHighlightClass = "";
-                if (station.properties.LT <= 0) {
-                    temperatureHighlightClass = "temperature-kl0";
-                }
-                if (station.properties.LT > 0) {
-                    temperatureHighlightClass = "temperature-gr0";
-                }
-                let temperatureIcon = L.divIcon({
-                    html: `<div class="temperature-label ${temperatureHighlightClass}">${station.properties.LT}</div>`,
-                });
-                let temperatureMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: temperatureIcon
-                });
-                temperatureMarker.addTo(overlays.temperature);
+                marker.addTo(overlays.temperature);
             }
         }
         //set map view to all stations
-        map.fitBounds(awsLayer.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
+        map.fitBounds(overlays.stations.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
     });
 
