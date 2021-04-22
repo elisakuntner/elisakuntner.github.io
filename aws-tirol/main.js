@@ -49,7 +49,7 @@ let newLabel = (coords, options) => {
     // console.log ("Koordinaten coords: ", coords);
     // console.log ("Optionsobjekt: ", options);
     // console.log("Marker: ", marker);
-    let marker = L.marker ([coords[1], coords [0]]; { //marker erstellen
+    let marker = L.marker ([coords[1], coords [0]], { //marker erstellen
         icon: label
     });
     return marker; //marker zurückliefern
