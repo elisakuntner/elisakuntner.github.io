@@ -44,6 +44,9 @@ L.control.scale({
 let newLabel = (coords, options) => {
     console.log ("Koordinaten coords: ", coords);
     console.log ("Optionsobjekt: ", obtions);
+    let marker = L.marker ([coords[1], coords [0]]); //marker erstellen
+    console.log("Marker: ", marker);
+    return marker; //marker zurückliefern
     //Label erstellen
     //den Label zurückgeben
 };
@@ -127,7 +130,9 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 console.log(station.properties.LT)
                 newLabel(station.geometry.coordinates, {
                     value: station.properties.LT
-                })
+                });
+
+                marker.addTO(map);
             
                 let temperatureHighlightClass = "";
                 if (station.properties.LT <= 0) {
