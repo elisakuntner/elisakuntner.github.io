@@ -11,7 +11,7 @@ h2 {
 
 .snow-label,
 .wind-label,
-.temperatur-label {
+.temperature-label {
     font-size: 1.25em;
     font-weight: bold;
     display: inline;
@@ -27,7 +27,7 @@ h2 {
 
 .snow-100,
 .wind-10,
-.temperatur-kl0 {
+.temperature-kl0 {
     background-color: blue;
 }
 
@@ -36,6 +36,6 @@ h2 {
     background-color: red;
 }
 
-.temperatur-gr0 {
+.temperature-gr0 {
     background-color: green;
 }

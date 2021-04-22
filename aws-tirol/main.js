@@ -9,6 +9,14 @@ let map = L.map("map", {
     ]
 });
 
+
+let overlays = {
+    stations: L.featureGroup(), //kann hier overlay objekte definieren definieren. besteht aus: key value pairs + einer feature group
+    temperature: L.featureGroup(),
+    snowheight: L.featureGroup(),
+    windspeed: L.featureGroup(),
+    winddirection: L.featureGroup(),
+};
 //https://leafletjs.com/reference-1.7.1.html#control-layers
 let layerControl = L.control.layers({ //zum basiskarten schaten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
@@ -18,11 +26,19 @@ let layerControl = L.control.layers({ //zum basiskarten schaten oben in ecke .ru
     "BasemapAT.overlay+ortho": L.layerGroup([ //kombinieren
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay")
-    ]) //zum kombinieren basislayer --> layergroup über    
-}).addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
-
+    ])
+}, { //zum kombinieren basislayer --> layergroup über  
+        "Wetterstationen in Tirol": overlays.stations,
+        "Temperatur (°C):": overlays.temperature,
+        "Windgeschwindigkeit, km/h": overlays.windspeed,
+        "Windrichtung": overlays.winddirection,
+        }  
+}) .addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson"; //wetterstationen daten aus dem link runterladen
+
+
+
 
 //feature gruppen erstellen // https://leafletjs.com/reference-1.7.1.html#featuregroup
 let awsLayer = L.featureGroup(); //aus leafletbib eine funktion. damit kann ich die wetterstationen aus u einschalten / die anzeige davon
@@ -112,23 +128,23 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
 
 
             if (station.properties.LT) {
-                let temperaturHighlightClass = "";
+                let temperatureHighlightClass = "";
                 if (station.properties.LT <= 0) {
-                    temperaturHighlightClass = "temperatur-kl0";
+                    temperatureHighlightClass = "temperature-kl0";
                 }
                 if (station.properties.LT > 0) {
-                    temperaturHighlightClass = "temperatur-gr0";
+                    temperatureHighlightClass = "temperature-gr0";
                 }
-                let temperaturIcon = L.divIcon({
-                    html: `<div class="temperatur-label ${temperaturHighlightClass}">${station.properties.LT}</div>`,
+                let temperatureIcon = L.divIcon({
+                    html: `<div class="temperature-label ${temperatureHighlightClass}">${station.properties.LT}</div>`,
                 });
-                let temperaturMarker = L.marker([
+                let temperatureMarker = L.marker([
                     station.geometry.coordinates[1],
                     station.geometry.coordinates[0]
                 ], {
-                    icon: temperaturIcon
+                    icon: temperatureIcon
                 });
-                temperaturMarker.addTo(temperaturLayer);
+                temperatureMarker.addTo(temperatureLayer);
             }
         }
         //set map view to all stations
