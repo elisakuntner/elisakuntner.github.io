@@ -43,6 +43,12 @@ L.control.scale({
 
 let getColor = (value, colorRamp) => {
     console.log("Wert:", value, "Palette: ", colorRamp);
+    for (let rule of colorRamp) {
+        if (value >= rule.min && val < rule.max) {
+            return rule.col; //col weils im color.js so definiert ist neben min,max
+        }
+    }
+    return "black"; //fals ein wert dabei ist der in der farbtabelle nicht dabei ist
 };
 
 let newLabel = (coords, options) => {
