@@ -57,8 +57,9 @@ let newLabel = (coords, options) => {
         html: `<div style="background-color:${color}>${options.value}</div>`,
         className: "text-label"
     })
-    let marker = L.marker ([coords[1], coords [0]], { //marker erstellen
-        icon: label
+    let marker = L.marker([coords[1], coords[0]], { //marker erstellen
+        icon: label,
+        title: `${options.station} (${coords[2]}m)` //wenn man mit maus drüber fahrt sieht man was es für ne station ist
     });
     return marker; //marker zurückliefern
 };
@@ -97,7 +98,8 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             if (typeof station.properties.HS == "number") { //überprüfene ob es eine nummr ist
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.HS,
-                        colors: COLORS.snowheight
+                        colors: COLORS.snowheight,
+                        station: station.properties.name
                     });
                 //https://leafletjs.com/reference-1.7.1.html#divicon
                     marker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
@@ -106,14 +108,16 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             if (typeof station.properties.WG == "number") {
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.WG,
-                        colors: COLORS.windspeed
+                        colors: COLORS.windspeed,
+                        station: station.properties.name
                     });
                     marker.addTo(overlays.windspeed);
             }
             if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT,
-                    colors: COLORS.temperature
+                    colors: COLORS.temperature,
+                    station: station.properties.name //übergebe an das label den namen derstation 
                 });
                 marker.addTo(overlays.temperature);
             }
