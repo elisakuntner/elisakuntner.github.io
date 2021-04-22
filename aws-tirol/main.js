@@ -28,7 +28,7 @@ let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .r
     ])
 }, { //zum kombinieren basislayer --> layergroup über  
         "Wetterstationen in Tirol": overlays.stations,
-        "Temperatur (°C):": overlays.temperature,
+        "Temperatur (°C)": overlays.temperature,
         "Windgeschwindigkeit (km/h)": overlays.windspeed,
         "Windrichtung": overlays.winddirection //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.rlays.winddirection,
 },{
