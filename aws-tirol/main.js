@@ -95,7 +95,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             //abfragen ob wert zur schneehöhe vorhanden ist:
             if (typeof station.properties.HS == "number") { //überprüfene ob es eine nummr ist
                     let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.HS,
+                        value: station.properties.HS.toFixed(0),
                         colors: COLORS.snowheight,
                         station: station.properties.name
                         
