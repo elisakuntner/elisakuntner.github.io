@@ -28,14 +28,14 @@ let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .r
         L.tileLayer.provider("BasemapAT.overlay")
     ])
 }, { //zum kombinieren basislayer --> layergroup über  
-        "Wetterstationen in Tirol": overlays.stations,
-        "Temperatur (°C)": overlays.temperature,
-        "Schneehöhe (cm)": overlays.snowheight,
-        "Windgeschwindigkeit (km/h)": overlays.windspeed,
-        "Windrichtung": overlays.winddirection, //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.rlays.winddirection,
-        "Relative Luftfeuchtigkeit (%)": overlays.humidity
-},{
-        collapsed: false
+    "Wetterstationen in Tirol": overlays.stations,
+    "Temperatur (°C)": overlays.temperature,
+    "Schneehöhe (cm)": overlays.snowheight,
+    "Windgeschwindigkeit (km/h)": overlays.windspeed,
+    "Windrichtung": overlays.winddirection, //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.rlays.winddirection,
+    "Relative Luftfeuchtigkeit (%)": overlays.humidity
+}, {
+    collapsed: false
 }).addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
 overlays.temperature.addTo(map);
 
@@ -106,25 +106,25 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             marker.addTo(overlays.stations); //marker zur karte fügen
             //abfragen ob wert zur schneehöhe vorhanden ist:
             if (typeof station.properties.HS == "number") { //überprüfene ob es eine nummr ist
-                    let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.HS.toFixed(0),
-                        colors: COLORS.snowheight,
-                        station: station.properties.name
-                        
-                    });
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.HS.toFixed(0),
+                    colors: COLORS.snowheight,
+                    station: station.properties.name
+
+                });
                 //https://leafletjs.com/reference-1.7.1.html#divicon
-                    marker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
+                marker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
 
             if (typeof station.properties.WG == "number") {
-                    let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.WG.toFixed(0),
-                        colors: COLORS.windspeed,
-                        station: station.properties.name
-                    });
-                    marker.addTo(overlays.windspeed);
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.WG.toFixed(0),
+                    colors: COLORS.windspeed,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.windspeed);
             }
-            if (typeof  station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
+            if (typeof station.properties.LT == "number") { //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT.toFixed(1),
                     colors: COLORS.temperature,
@@ -135,8 +135,8 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
             if (typeof station.properties.RH == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.RH.toFixed(1),
-                    colors:COLORS.humidity,
-                    station:station.properties.name
+                    colors: COLORS.humidity,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.humidity);
             }
@@ -144,4 +144,3 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
         //set map view to all stations
         map.fitBounds(overlays.stations.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
     });
-
