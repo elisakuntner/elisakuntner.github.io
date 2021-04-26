@@ -54,6 +54,14 @@ let getColor = (value, colorRamp) => {
     return "black"; //fals ein wert dabei ist der in der farbtabelle nicht dabei ist
 };
 
+let getDirections = (value, directions) => {
+    for (let rule of directions) {
+        if (value >= rule.min && value < rule.max) {
+            return rule.dir;
+        }
+    }
+};
+
 let newLabel = (coords, options) => {
     let color = getColor(options.value, options.colors); // übergabe value und name..
     let label = L.divIcon({
