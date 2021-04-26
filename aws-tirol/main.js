@@ -33,7 +33,7 @@ let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .r
         "Schneehöhe (cm)": overlays.snowheight,
         "Windgeschwindigkeit (km/h)": overlays.windspeed,
         "Windrichtung": overlays.winddirection, //hiermit kann ich alles filtern, bzw überprüfen ob es eine Nummer ist.rlays.winddirection,
-        "Relative Luftfeuchtigkeit": overlays.humidity
+        "Relative Luftfeuchtigkeit (%)": overlays.humidity
 },{
         collapsed: false
 }).addTo(map); //jetzt haben wir zwei layer drinnnen, einmal ortho einmal basemap
@@ -91,7 +91,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 <li>Schneehöhe:${station.properties.HS || "?"} cm</li>
                 <li>Windgeschwindigkeit:${station.properties.WG || "?"} km/h</li>
                 <li>Windrichtung:${station.properties.WR || "?"} </li>
-                <li>Luftfeuchtigkeit:${station.properties.RH || "?"}</li>
+                <li>Luftfeuchtigkeit:${station.properties.RH || "?"} %</li>
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `);
