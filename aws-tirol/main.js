@@ -89,6 +89,8 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 station.geometry.coordinates[0]
             ]);
             let formattedDate = new Date(station.properties.date);
+            let direction = getDirections (station.properties.WR, DIRECTIONS); //ausführen der Fuktion getDirektion/Aufruf mit Wert der Windrichtung und dann an die Kategorisierung übergeben. ist jetzt in der Variablen direction gespeichert, die man fürs popup verwenden kann
+            
             //popup mit marker infos erstellen: 
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
@@ -98,7 +100,7 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                 <li>Temperatur:${station.properties.LT} C</li>
                 <li>Schneehöhe:${station.properties.HS || "?"} cm</li>
                 <li>Windgeschwindigkeit:${station.properties.WG || "?"} km/h</li>
-                <li>Windrichtung:${station.properties.WR || "?"} </li>
+                <li>Windrichtung:${direction || "?"} </li> 
                 <li>Luftfeuchtigkeit:${station.properties.RH || "?"} %</li>
             </ul>
             <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
