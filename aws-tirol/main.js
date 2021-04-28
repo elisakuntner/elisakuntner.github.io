@@ -112,12 +112,9 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
                     value: station.properties.HS.toFixed(0),
                     colors: COLORS.snowheight,
                     station: station.properties.name
-
-                });
-                //https://leafletjs.com/reference-1.7.1.html#divicon
+                }); //https://leafletjs.com/reference-1.7.1.html#divicon
                 marker.addTo(overlays.snowheight); //kann damit filtern zwischen station mit schnee und ohne schneelayer.. 
             }
-
             if (typeof station.properties.WG == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.WG.toFixed(0),
