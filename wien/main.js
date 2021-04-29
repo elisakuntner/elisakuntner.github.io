@@ -73,7 +73,7 @@ overlays.sightSeeing.addTo(map);
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<strong>$feature.properties.Line_NAME)</strong>
+            layer.bindPopup(`<strong>${feature.properties.Line_NAME})</strong>
             <hr>
             Station: ${feature.properties.STAT_Name}`)
         },
@@ -99,7 +99,7 @@ let drawBusLines = (geojsonData) => {
             }
         },
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<strong>$feature.properties.Line_NAME)</strong>
+            layer.bindPopup(`<strong>${feature.properties.Line_NAME})</strong>
             <hr>
             von ${feature.properties.FROM_NAME}<br>
             nach ${feature.properties.TO_NAME}
@@ -132,7 +132,7 @@ let drawPedestrianAreas = (geojsonData) => {
 let drawsightSeeing = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<strong>$feature.properties.NAME)</strong>
+            layer.bindPopup(`<strong>${feature.properties.NAME})</strong>
             <hr>
             Sehenswürdigkeit: ${feature.properties.NAME}`)
         },
