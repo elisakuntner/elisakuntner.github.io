@@ -52,5 +52,9 @@ overlays.pedAreas.addTo(map);
 fetch("data/TOURISTIKHTSVSLOGD.json")
     .then(response => response.json()) //wieder wenn er erfolgreich geladen ist, dann...
     .then(stations =>{
-        L.geoJson(stations).addTo(map);
+        L.geoJson(stations, { //wir laden stations und dann ein objekt in den geschwungenen Klammern
+            onEachFeature:(feature, layer) => {
+                layer.bindPopup(feature.properties.STAT_NAME)
+            }
+        }).addTo(map);
     })
