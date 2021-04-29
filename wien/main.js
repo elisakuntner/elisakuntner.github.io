@@ -47,3 +47,10 @@ let layerControl = L.control.layers({
 overlays.busLines.addTo(map);
 overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
+
+
+fetch("data/TOURISTIKHTSVSLOGD.json")
+    .then(response => response.json()) //wieder wenn er erfolgreich geladen ist, dann...
+    .then(stations =>{
+        L.geoJson(stations).addTo(map);
+    })
