@@ -140,7 +140,7 @@ let drawsightSeeing = (geojsonData) => {
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: "icons/sehenswuerdigogd.png",
-                    iconSize: [38, 38]
+                    iconSize: [30, 30]
                 })
             })
         },
@@ -163,6 +163,6 @@ for (let config of OGDWIEN) {
             } else if (config.title == "Sehenswürdigkeiten Vienna Sightseeing") {
                 drawsightSeeing(geojsonData);
             }
-        }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
+        }) //weiß nicht welche daten pro schleife aufgerufen werden, desewgen nenne ich s geojson Data
 
 }
