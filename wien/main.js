@@ -55,6 +55,13 @@ fetch("data/TOURISTIKHTSVSLOGD.json")
         L.geoJson(stations, { //wir laden stations und dann ein objekt in den geschwungenen Klammern
             onEachFeature:(feature, layer) => {
                 layer.bindPopup(feature.properties.STAT_NAME)
+            },
+            pointToLayer: (geoJsonPoint, latlng) => {
+                return L.marker(latlng, {
+                    icon: L.icon ({
+                        iconUrl: "icons/busstop.png",
+                        iconSitze: [45, 45]  
+                })
             }
         }).addTo(map);
     })
