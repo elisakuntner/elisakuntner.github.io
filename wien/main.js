@@ -78,7 +78,7 @@ let drawBusStop = (geojsonData) => {
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: "icons/busstop.png",
-                    iconSitze: [38, 38]
+                    iconSize: [38, 38]
                 })
             })
         },
@@ -86,7 +86,7 @@ let drawBusStop = (geojsonData) => {
     }).addTo(map);
 }
 
-let drawLine = (geojsonData => {
+let drawBusLine = (geojsonData => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
             layer.bindPopup((`strong>$feature.properties.Line_NAME)</strong>
@@ -98,16 +98,24 @@ let drawLine = (geojsonData => {
 
 //Schleife schreiben die über das ogdwien drüberläuft: --> gleiches wie Oberes ausgeklammert
 for (let config of OGDWIEN) {
-    console.log("Congig: ", config.data); //console log schreibt was ins consolefenster rein
+    console.log("Config: ", config.data); //console log schreibt was ins consolefenster rein
     fetch(config.data) //schleife machen mit fetch, der uns die daten ladet, die im data drin sind
         .then(response => response.json()) //innere runde klammer: Funktionsaufruf, damit es gestartet / ausgeführt wird ! 
         .then(geojsonData => {
             console.log("Data: ", geojsonData);
             if (config.title == "Haltestellen Vienna Sightseeing") //wenn es die Haltestellen sind:
                 drawBusStop(geojsonData);
-            if (config.title == "Liniennetz Vienna Sightseeing")
-                drawLine(geojsonData);
-                //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
+            //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
 
+}
+for (let config of OGDWIEN) {
+    console.log("Config: ", config.data); //console log schreibt was ins consolefenster rein
+    fetch(config.data) //schleife machen mit fetch, der uns die daten ladet, die im data drin sind
+        .then(response => response.json()) //innere runde klammer: Funktionsaufruf, damit es gestartet / ausgeführt wird ! 
+        .then(geojsonData => {
+            console.log("Data: ", geojsonData);
+            if (config.title == "Liniennetz Vienna Sightseeing")
+                drawBusLine(geojsonData);
+        })
 }
