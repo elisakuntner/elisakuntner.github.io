@@ -60,7 +60,7 @@ fetch("data/TOURISTIKHTSVSLOGD.json")
                 return L.marker(latlng, {
                     icon: L.icon ({
                         iconUrl: "icons/busstop.png",
-                        iconSitze: [45, 45]  
+                        iconSitze: [38, 38]  
                 })
             }
         }).addTo(map);
