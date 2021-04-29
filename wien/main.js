@@ -17,7 +17,8 @@ let baselayers = {
 let overlays = {
     busLines: L.featureGroup(),
     busStops: L.featureGroup(),
-    pedAreas: L.featureGroup()
+    pedAreas: L.featureGroup(),
+    sightSeeing: L.featureGroup(),
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
@@ -40,13 +41,15 @@ let layerControl = L.control.layers({
 }, {
     "Liniennetz Vienna Sightseeing": overlays.busLines,
     "Haltestellen Vienna Sightseeing": overlays.busStops,
-    "Fußgängerzonen": overlays.pedAreas
+    "Fußgängerzonen": overlays.pedAreas,
+    "Sehenswürdigkeiten": overlays.sightSeeing
 }).addTo(map);
 
 // alle Overlays nach dem Laden anzeigen
 overlays.busLines.addTo(map);
 overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
+overlays.sightSeeing.addTo(map);
 
 // fetch("data/TOURISTIKHTSVSLOGD.json")
 //     .then(response => response.json()) //wieder wenn er erfolgreich geladen ist, dann...
@@ -114,13 +117,32 @@ let drawPedestrianAreas = (geojsonData) => {
                 fillOpacity: 0.3
             }
         },
-        onEachFeature: (feature, layyer) => {
-            layer.bindPopup(`<strong>Fußgängerzone ${feature.properties.ADRESSE}
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>Fußgängerzone ${feature.properties.ADRESSE}</strong>
             <hr>
             ${feature.properties.ZEITRAUM || ""}<br>
-            ${feature.properties.AUSN_TEXT|| ""}`);
+            ${feature.properties.AUSN_TEXT|| ""}
+            `);
         }
     }).addTo(overlays.pedAreas);
+}
+
+let drawsightSeeing = (geojsonData) => {
+    L.geoJson(geojsonData, {
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>$feature.properties.NAME)</strong>
+            <hr>
+            Sehenswürdigkeit: ${feature.properties.NAME}`)
+        },
+        pointToLayer: (geoJsonPoint, latlng) => {
+            return L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: "icons/sehenswuerdigogd.png",
+                    iconSize: [38, 38]
+                })
+            })
+        },
+    }).addTo(overlays.sightSeeing);
 }
 
 //Schleife schreiben die über das ogdwien drüberläuft: --> gleiches wie Oberes ausgeklammert
@@ -136,6 +158,8 @@ for (let config of OGDWIEN) {
                 drawBusLine(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
             } else if (config.title == "Fußgängerzone") {
                 drawPedestrianAreas(geojsonData);
+            } else if (config.title == "Sehenswürdigkeit") {
+                drawsightSeeing(geojsonData);
             }
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
 
