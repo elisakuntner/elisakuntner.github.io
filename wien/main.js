@@ -70,7 +70,9 @@ overlays.pedAreas.addTo(map);
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(feature.properties.STAT_NAME)
+            layer.bindPopup(`strong>$feature.properties.Line_NAME)</strong>
+            <hr>
+            Station: ${feature.properties.STAT_Name}`)
         },
         pointToLayer: (geoJsonPoint, latlng) => {
             return L.marker(latlng, {
