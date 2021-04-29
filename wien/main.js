@@ -103,6 +103,26 @@ let drawBusLine = (geojsonData => {
     }).addTo(overlays.busLines)
 })
 
+let drawPedestrianAreas = (geojsonData) => {
+    console.log("Zone: ", geojsonData);
+    L.geoJson(geojsonData), {
+        style: (feature) => {
+            return {
+                stroke: true,
+                color: "silver",
+                fillCOlor: "yellow",
+                fillOpacity: 0.3
+            }
+        },
+        onEachFeature: (feature, layyer) => {
+            layer.bindPopup(`<strong>Fußgängerzone ${feature.properties.ADRESSE}
+            <hr>
+            ${feature.properties.ZEITRAUM || ""}<br>
+            ${feature.properties.AUSN_TEXT|| ""}`);
+        }
+    }).addTo(overlays.pedAreas);
+}
+
 //Schleife schreiben die über das ogdwien drüberläuft: --> gleiches wie Oberes ausgeklammert
 for (let config of OGDWIEN) {
     console.log("Config: ", config.data); //console log schreibt was ins consolefenster rein
@@ -114,6 +134,8 @@ for (let config of OGDWIEN) {
                 drawBusStop(geojsonData);
             } else if (config.title == "Liniennetz Vienna Sightseeing") { //mit else if wird die zweite abfrage immer ausgeführt
                 drawBusLine(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
+            } else if (config.title == "Fußgängerzone") {
+                drawPedestrianAreas(geojsonData);
             }
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
 
