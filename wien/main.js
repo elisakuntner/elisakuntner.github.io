@@ -91,7 +91,13 @@ let drawBusLine = (geojsonData => {
         style: (feature) => {  //farben der linien ändern: 
             let col = "red";
             if(feature.properties.LINE_NAME == "Blue Line") {
-                col = "blue"
+                col = COLORS.buslines["Blue Line"]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
+            }
+            if(feature.properties.LINE_NAME == "Yellow Line") {
+                col = COLORS.buslines["Yellow Line"]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
+            }
+            if(feature.properties.LINE_NAME == "Grey Line") {
+                col = COLORS.buslines["Grey Line"]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
             }
             return {
                 color: col
