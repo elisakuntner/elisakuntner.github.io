@@ -83,7 +83,7 @@ let drawBusStop = (geojsonData) => {
             })
         },
         attribution: '<a href="https://data.wien-gv.at"</a>, <a href="https://mapicons.mapsmarker.com/">Maps Icons Collections</a>'
-    }).addTo(map);
+    }).addTo(overlays.busStops);
 }
 
 let drawBusLine = (geojsonData => {
@@ -93,7 +93,7 @@ let drawBusLine = (geojsonData => {
             <hr>
             Line: ${feature.properties.LINE_Name}`))
         }
-    })
+    }).addTo(overlays.busLines)
 })
 
 //Schleife schreiben die über das ogdwien drüberläuft: --> gleiches wie Oberes ausgeklammert
@@ -105,17 +105,8 @@ for (let config of OGDWIEN) {
             console.log("Data: ", geojsonData);
             if (config.title == "Haltestellen Vienna Sightseeing") //wenn es die Haltestellen sind:
                 drawBusStop(geojsonData);
-            //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
+            else if (config.title == "Liniennetz Vienna Sightseeing") //mit else if wird die zweite abfrage immer ausgeführt
+                drawBusLine(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
 
-}
-for (let config of OGDWIEN) {
-    console.log("Config: ", config.data); //console log schreibt was ins consolefenster rein
-    fetch(config.data) //schleife machen mit fetch, der uns die daten ladet, die im data drin sind
-        .then(response => response.json()) //innere runde klammer: Funktionsaufruf, damit es gestartet / ausgeführt wird ! 
-        .then(geojsonData => {
-            console.log("Data: ", geojsonData);
-            if (config.title == "Liniennetz Vienna Sightseeing")
-                drawBusLine(geojsonData);
-        })
 }
