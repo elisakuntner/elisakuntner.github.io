@@ -49,20 +49,32 @@ overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
 
 
-fetch("data/TOURISTIKHTSVSLOGD.json")
-    .then(response => response.json()) //wieder wenn er erfolgreich geladen ist, dann...
-    .then(stations => {
-        L.geoJson(stations, { //wir laden stations und dann ein objekt in den geschwungenen Klammern
-            onEachFeature: (feature, layer) => {
-                layer.bindPopup(feature.properties.STAT_NAME)
-            },
-            pointToLayer: (geoJsonPoint, latlng) => {
-                return L.marker(latlng, {
-                    icon: L.icon({
-                        iconUrl: "icons/busstop.png",
-                        iconSitze: [38, 38]
-                    })
-                })
-            }
-        }).addTo(map);
-    })
+// fetch("data/TOURISTIKHTSVSLOGD.json")
+//     .then(response => response.json()) //wieder wenn er erfolgreich geladen ist, dann...
+//     .then(stations => {
+//         L.geoJson(stations, { //wir laden stations und dann ein objekt in den geschwungenen Klammern
+//             onEachFeature: (feature, layer) => {
+//                 layer.bindPopup(feature.properties.STAT_NAME)
+//             },
+//             pointToLayer: (geoJsonPoint, latlng) => {
+//                 return L.marker(latlng, {
+//                     icon: L.icon({
+//                         iconUrl: "icons/busstop.png",
+//                         iconSitze: [38, 38]
+//                     })
+//                 })
+//             }
+//         }).addTo(map);
+//     })
+//Schleife schreiben die über das ogswien drüberläuft:
+for (let config of OGDWIEN) {
+    console.log("Congig: ", config.data); //console log schreibt was ins consolefenster rein
+    fetch(config.data) //schleife machen mit fetch, der uns die daten ladet, die im data drin sind
+        .then(response => response.json()) //innere runde klammer: damit es gestartet / ausgeführt wird ! 
+        .then(geojsonData => {
+            console.log("Data: ", geojsonData);
+        }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
+}
+
+
+
