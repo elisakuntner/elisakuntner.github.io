@@ -51,16 +51,17 @@ overlays.pedAreas.addTo(map);
 
 fetch("data/TOURISTIKHTSVSLOGD.json")
     .then(response => response.json()) //wieder wenn er erfolgreich geladen ist, dann...
-    .then(stations =>{
+    .then(stations => {
         L.geoJson(stations, { //wir laden stations und dann ein objekt in den geschwungenen Klammern
-            onEachFeature:(feature, layer) => {
+            onEachFeature: (feature, layer) => {
                 layer.bindPopup(feature.properties.STAT_NAME)
             },
             pointToLayer: (geoJsonPoint, latlng) => {
                 return L.marker(latlng, {
-                    icon: L.icon ({
+                    icon: L.icon({
                         iconUrl: "icons/busstop.png",
-                        iconSitze: [38, 38]  
+                        iconSitze: [38, 38]
+                    })
                 })
             }
         }).addTo(map);
