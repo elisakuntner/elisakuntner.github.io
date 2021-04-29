@@ -79,7 +79,8 @@ let drawBusStop = (geojsonData) => {
                     iconSitze: [38, 38]
                 })
             })
-        }
+        },
+        attribution: '<a href="https://data.wien-gv.at"</a>, <a href="https://mapicons.mapsmarker.com/">Maps Icons Collections</a>'
     }).addTo(map);
 }
 
@@ -95,3 +96,4 @@ for (let config of OGDWIEN) {
             //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
 }
+
