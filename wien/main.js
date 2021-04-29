@@ -89,7 +89,8 @@ let drawBusStop = (geojsonData) => {
     }).addTo(overlays.busStops);
 }
 
-let drawBusLine = (geojsonData => {
+let drawBusLines = (geojsonData) => {
+    console.log("Bus Lines: ",geojsonData);
     L.geoJson(geojsonData, {
         style: (feature) => { //farben der linien ändern: 
             let col = COLORS.buslines[feature.properties.LINE_NAME]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
@@ -101,19 +102,20 @@ let drawBusLine = (geojsonData => {
             layer.bindPopup(`<strong>$feature.properties.Line_NAME)</strong>
             <hr>
             von ${feature.properties.FROM_NAME}<br>
-            nach ${feature.properties.TO_NAME}`)
+            nach ${feature.properties.TO_NAME}
+            `)
         }
-    }).addTo(overlays.busLines)
-})
+    }).addTo(overlays.busLines);
+}
 
 let drawPedestrianAreas = (geojsonData) => {
     console.log("Zone: ", geojsonData);
-    L.geoJson(geojsonData), {
+    L.geoJson(geojsonData, {
         style: (feature) => {
             return {
                 stroke: true,
                 color: "silver",
-                fillCOlor: "yellow",
+                fillColor: "yellow",
                 fillOpacity: 0.3
             }
         },
@@ -155,7 +157,7 @@ for (let config of OGDWIEN) {
             if (config.title == "Haltestellen Vienna Sightseeing") { //wenn es die Haltestellen sind:
                 drawBusStop(geojsonData);
             } else if (config.title == "Liniennetz Vienna Sightseeing") { //mit else if wird die zweite abfrage immer ausgeführt
-                drawBusLine(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
+                drawBusLines(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
             } else if (config.title == "Fußgängerzone") {
                 drawPedestrianAreas(geojsonData);
             } else if (config.title == "Sehenswürdigkeit") {
