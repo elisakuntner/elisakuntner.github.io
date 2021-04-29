@@ -86,6 +86,16 @@ let drawBusStop = (geojsonData) => {
     }).addTo(map);
 }
 
+let drawLine = (geojsonData => {
+    L.geoJson(geojsonData, {
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup((`strong>$feature.properties.Line_NAME)</strong>
+            <hr>
+            Line: ${feature.properties.LINE_Name}`))
+        }
+    })
+})
+
 //Schleife schreiben die über das ogdwien drüberläuft: --> gleiches wie Oberes ausgeklammert
 for (let config of OGDWIEN) {
     console.log("Congig: ", config.data); //console log schreibt was ins consolefenster rein
@@ -95,7 +105,9 @@ for (let config of OGDWIEN) {
             console.log("Data: ", geojsonData);
             if (config.title == "Haltestellen Vienna Sightseeing") //wenn es die Haltestellen sind:
                 drawBusStop(geojsonData);
-            //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
+            if (config.title == "Liniennetz Vienna Sightseeing")
+                drawLine(geojsonData);
+                //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
-}
 
+}
