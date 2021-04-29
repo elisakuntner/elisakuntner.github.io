@@ -73,9 +73,9 @@ overlays.sightSeeing.addTo(map);
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<strong>${feature.properties.Line_NAME})</strong>
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
             <hr>
-            Station: ${feature.properties.STAT_Name}`)
+            Station: ${feature.properties.STAT_NAME}`)
         },
         pointToLayer: (geoJsonPoint, latlng) => {
             return L.marker(latlng, {
@@ -85,12 +85,13 @@ let drawBusStop = (geojsonData) => {
                 })
             })
         },
-        attribution: '<a href="https://data.wien-gv.at"</a>, <a href="https://mapicons.mapsmarker.com/">Maps Icons Collections</a>'
+        //attribution: '<a href="https://data.wien-gv.at"</a>, <a href="https://mapicons.mapsmarker.com/">Maps Icons Collections</a>'
+        attribution: "<a href='https://data.wien.gv.at'>Stadt Wien</a>"
     }).addTo(overlays.busStops);
 }
 
 let drawBusLines = (geojsonData) => {
-    console.log("Bus Lines: ",geojsonData);
+    console.log("Bus Lines: ", geojsonData);
     L.geoJson(geojsonData, {
         style: (feature) => { //farben der linien ändern: 
             let col = COLORS.buslines[feature.properties.LINE_NAME]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
@@ -99,12 +100,13 @@ let drawBusLines = (geojsonData) => {
             }
         },
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<strong>${feature.properties.Line_NAME})</strong>
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
             <hr>
             von ${feature.properties.FROM_NAME}<br>
             nach ${feature.properties.TO_NAME}
             `)
-        }
+        },
+        attribution: "<a href='https://data.wien.gv.at'>Stadt Wien</a>"
     }).addTo(overlays.busLines);
 }
 
@@ -125,14 +127,15 @@ let drawPedestrianAreas = (geojsonData) => {
             ${feature.properties.ZEITRAUM || ""}<br>
             ${feature.properties.AUSN_TEXT|| ""}
             `);
-        }
+        },
+        attribution: "<a href='https://data.wien.gv.at'>Stadt Wien</a>"
     }).addTo(overlays.pedAreas);
 }
 
 let drawsightSeeing = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<strong>${feature.properties.NAME})</strong>
+            layer.bindPopup(`<strong>${feature.properties.NAME}</strong>
             <hr>
             Sehenswürdigkeit: ${feature.properties.NAME}`)
         },
@@ -144,6 +147,7 @@ let drawsightSeeing = (geojsonData) => {
                 })
             })
         },
+        attribution: "<a href='https://data.wien.gv.at'>Stadt Wien</a>"
     }).addTo(overlays.sightSeeing);
 }
 
