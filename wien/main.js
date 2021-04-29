@@ -160,7 +160,7 @@ for (let config of OGDWIEN) {
                 drawBusLines(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
             } else if (config.title == "Fußgängerzone") {
                 drawPedestrianAreas(geojsonData);
-            } else if (config.title == "Sehenswürdigkeit") {
+            } else if (config.title == "Sehenswürdigkeiten Vienna Sightseeing") {
                 drawsightSeeing(geojsonData);
             }
         }) //weiß nicht welche daten pr oschleife aufgerufen werden, desewgen nenne ich s geojson Data
