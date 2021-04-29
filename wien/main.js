@@ -88,10 +88,10 @@ let drawBusStop = (geojsonData) => {
 
 let drawBusLine = (geojsonData => {
     L.geoJson(geojsonData, {
-        style: (feature) => {  //farben der linien ändern: 
-            let col = "red";
-            if(feature.properties.LINE_NAME == "Blue Line") {
-                col = COLORS.buslines[feature.properties.LINE_NAME]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
+        style: (feature) => { //farben der linien ändern: 
+            let col = COLORS.buslines[feature.properties.LINE_NAME]; //Eckige Klammern weil ich in einem Objekt auf einen wert/Schlüssel zureifen will, der ein Leerzeichen aht
+            return {
+                color: col
             }
         },
         onEachFeature: (feature, layer) => {
