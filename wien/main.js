@@ -162,7 +162,7 @@ for (let config of OGDWIEN) {
                 drawBusStop(geojsonData);
             } else if (config.title == "Liniennetz Vienna Sightseeing") { //mit else if wird die zweite abfrage immer ausgeführt
                 drawBusLines(geojsonData); //L.geoJson(geojsonData).addTo(map) //alle geladenen Datensätze erden auf karte visualisiert.
-            } else if (config.title == "Fußgängerzone") {
+            } else if (config.title == "Fußgängerzonen") {
                 drawPedestrianAreas(geojsonData);
             } else if (config.title == "Sehenswürdigkeiten Vienna Sightseeing") {
                 drawsightSeeing(geojsonData);
