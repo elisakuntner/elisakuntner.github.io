@@ -184,3 +184,11 @@ var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"),{
     minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
 }
 ).addTo(map);
+
+
+//Reachability
+L.control.reachability({
+    //add settings/options here
+    apiKey: "5b3ce3597851110001cf624806fb953f549242eabf4fb64d49de6960"
+}).addTo(map)
+
