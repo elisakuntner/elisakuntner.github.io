@@ -190,7 +190,22 @@ var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"), {
 //funktion
 let styleIntervals = (feature) =>{
     console.log(feature.properties); //kann nachschauen mit welchen range/properties intervals arbeitet, um dann die farben auszuwäheln..
-
+    console.log(feature.properties.Measure)
+    let color = ""; //definiert noch kein wert
+    let range = feature.properties.Range; //wenn die fkt aufgerufen wird im if, dann wird überall eine andere farbe auferufen.
+    if(feature.properties.Measure === "time") {
+        color  = COLORS.minutes[range];  //achtugn hier bei klammern!
+    } else if (feature.properties.Measure === "distance") {
+        color = COLORS.kilometers[range];
+    }
+    else {
+        color = "black";  
+    }
+    return { //return, damit dann die farbe auch aufgerufen wird bwz ausgegeben.
+        color: color,
+        opacity: 0.5,
+        fillOpacity: 0.2
+    };
 }
 
 //Reachability
