@@ -16,7 +16,7 @@ let baselayers = {
 // Overlays für die Themen zum Ein- und Ausschalten definieren
 let overlays = {
     busLines: L.featureGroup(),
-    busStops: L.markerClusterGroup(), //jetzt sind die busstops in markenclsuter dargestellt, weil ich nicht mehr featreGroub stehen habe
+    busStops: L.markerClusterGroup(), //jetzt sind die busstops in markenclsuter dargestellt, weil ich nicht mehr featreGroub stehen habe.  //wie featuregroup aber beherscht clustering, manchmal rutscht eins raus, bei zoom
     pedAreas: L.featureGroup(),
     sightSeeing: L.featureGroup(),
 };
