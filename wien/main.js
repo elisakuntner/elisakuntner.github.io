@@ -196,7 +196,7 @@ let styleIntervals = (feature) =>{
     if(feature.properties.Measure === "time") {
         color  = COLORS.minutes[range];  //achtugn hier bei klammern!
     } else if (feature.properties.Measure === "distance") {
-        color = COLORS.kilometers[range];
+        color = COLORS.kilometers[range]; //könnte hier überall auch gleich return schreiben.
     }
     else {
         color = "black";  
