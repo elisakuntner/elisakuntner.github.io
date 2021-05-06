@@ -23,6 +23,7 @@ let overlays = {
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
 let map = L.map("map", {
+    fullscreenControl: true, //benötigt cdnsj verlinkung in index.html
     center: [48.208333, 16.373056],
     zoom: 13,
     layers: [
@@ -170,3 +171,10 @@ for (let config of OGDWIEN) {
         }) //weiß nicht welche daten pro schleife aufgerufen werden, desewgen nenne ich s geojson Data
 
 }
+
+
+
+//Leaflet hash
+//var hash = new L.Hash(map); //Var hash steht hier nur weil man eine neue Var erstellt, falls man sie später noch mal braucht. new  --> nach L muss großbuchstabe sein.
+//kürzere schreibweise um es der map dazuzugeben: 
+L.hash(map);
