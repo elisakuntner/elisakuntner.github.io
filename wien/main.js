@@ -204,5 +204,5 @@ L.control.reachability({
     travelModeButton3Content: '',
     travelModeButton3StyleClass: 'fa fa-male',
     travelModeButton4Content: '',
-    travelModeButton4StyleClass: 'fas fa-wheelchair-alt',
+    travelModeButton4StyleClass: 'fas fa-wheelchair',
 }).addTo(map);
