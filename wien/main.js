@@ -179,11 +179,10 @@ for (let config of OGDWIEN) {
 //kürzere schreibweise um es der map dazuzugeben: 
 L.hash(map);
 
-var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"),{
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"), {
     toggleDisplay: true, //minimap ein und ausklappbar
     minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
-}
-).addTo(map);
+}).addTo(map);
 
 
 //Reachability
@@ -191,13 +190,13 @@ L.control.reachability({
     //add settings/options here
     apiKey: "5b3ce3597851110001cf624806fb953f549242eabf4fb64d49de6960",
     drawButtonContent: '',
-    drawButtonStyleClass: 'fa fa-pencil',
+    drawButtonStyleClass: 'fa fa-pencil-alt',
     deleteButtonContent: '',
     deleteButtonStyleClass: 'fa fa-trash',
     distanceButtonContent: '',
     distanceButtonStyleClass: 'fa fa-road',
     timeButtonContent: '',
-    timeButtonStyleClass: 'fa fa-clock-o',
+    timeButtonStyleClass: 'far fa-clock',
     travelModeButton1Content: '',
     travelModeButton1StyleClass: 'fa fa-car',
     travelModeButton2Content: '',
@@ -205,6 +204,5 @@ L.control.reachability({
     travelModeButton3Content: '',
     travelModeButton3StyleClass: 'fa fa-male',
     travelModeButton4Content: '',
-    travelModeButton4StyleClass: 'fa fa-wheelchair-alt'
-}).addTo(map)
-
+    travelModeButton4StyleClass: 'fas fa-wheelchair-alt',
+}).addTo(map);
