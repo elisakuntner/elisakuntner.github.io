@@ -184,15 +184,24 @@ var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"), {
     minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
 }).addTo(map);
 
+//reachability plugin
+
+//Styling the reachability polygons: mit einer funktion die die option angibt unddie farbe (will fürverschiedenen erreichbarkeit (schwer) andere farbe.) vor plugin aufruf, damitichs dann hab untn
+//funktion
+let styleIntervals = (feature) =>{
+    console.log(feature.properties); //kann nachschauen mit welchen range/properties intervals arbeitet, um dann die farben auszuwäheln..
+
+}
 
 //Reachability
 L.control.reachability({
     //add settings/options here
     apiKey: "5b3ce3597851110001cf624806fb953f549242eabf4fb64d49de6960",
+    styleFn: styleIntervals, //Fktaufruf
     drawButtonContent: '',
     drawButtonStyleClass: 'fa fa-pencil-alt fa-2x',
     deleteButtonContent: '',
-    deleteButtonStyleClass: 'fa fa-trash fa-2x',
+    deleteButtonStyleClass: 'fa fa-trash fa-2x', //im quelltext nachschaune mit F12 im browser ---> icons werdne mit fa-2x vergrößert/größe verdoppelt
     distanceButtonContent: '',
     distanceButtonStyleClass: 'fa fa-road fa-2x',
     timeButtonContent: '',
@@ -206,3 +215,4 @@ L.control.reachability({
     travelModeButton4Content: '',
     travelModeButton4StyleClass: 'fas fa-wheelchair fa-2x',
 }).addTo(map);
+
