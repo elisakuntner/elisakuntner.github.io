@@ -178,3 +178,5 @@ for (let config of OGDWIEN) {
 //var hash = new L.Hash(map); //Var hash steht hier nur weil man eine neue Var erstellt, falls man sie später noch mal braucht. new  --> nach L muss großbuchstabe sein.
 //kürzere schreibweise um es der map dazuzugeben: 
 L.hash(map);
+
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"),).addTo(map);
