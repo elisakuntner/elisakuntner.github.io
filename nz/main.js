@@ -13,6 +13,7 @@ let stop = {
 const map = L.map("map",{
     //center: [ stop.lat, stop.lng ], //coordinaten einfügen. kann ich hier auskommentieren, weil in Z31
     //zoom: 13,
+    fullscreenControl: true,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]

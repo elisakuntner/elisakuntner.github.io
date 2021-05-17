@@ -2,6 +2,7 @@
 let basemapGray = L.tileLayer.provider("BasemapAT.grau"); //das vom plugin dings rauskopieren. 
 //https://leafletjs.com/reference-1.7.1.html#map-example
 let map = L.map("map", {
+    fullscreenControl: true,
     center: [47, 11],
     zoom: 9,
     layers: [
@@ -17,6 +18,8 @@ let overlays = {
     winddirection: L.featureGroup(),
     humidity: L.featureGroup()
 };
+
+
 //https://leafletjs.com/reference-1.7.1.html#control-layers
 let layerControl = L.control.layers({ //zum basiskarten schalten oben in ecke .runde klammer für die funktion die ausgeführt wird, geschwungene wo wir das control konfigurieren
     "BasemapAT.grau": basemapGray, // key : value paare sind hier drinnen 
