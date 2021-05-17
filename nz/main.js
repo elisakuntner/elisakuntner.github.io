@@ -65,7 +65,7 @@ nav.onchange = (evt) => {
 };
 
 //Minimap
-var miniMap = new L.Control.MiniMap(L.tileLayer.provider("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"), {
+var miniMap = new L.Control.MiniMap(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"), {
     toggleDisplay: true, //minimap ein und ausklappbar
     minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
 }).addTo(map);
