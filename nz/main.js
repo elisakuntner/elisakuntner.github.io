@@ -64,7 +64,11 @@ nav.onchange = (evt) => {
     window.location.href = link; //window=unser browserwindow
 };
 
-
+//Minimap
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"), {
+    toggleDisplay: true, //minimap ein und ausklappbar
+    minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
+}).addTo(map);
 
 
 

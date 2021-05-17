@@ -146,3 +146,8 @@ fetch(awsUrl) //Neuer js befehl zum daten laden aus URL. response dann konvertie
         //set map view to all stations
         map.fitBounds(overlays.stations.getBounds()); //karten-objekt(=fitBounds) soll an die grenzen ds aws layer gesetzt werden. 
     });
+//minimap
+    var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"), {
+        toggleDisplay: true, //minimap ein und ausklappbar
+        minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
+    }).addTo(map);
