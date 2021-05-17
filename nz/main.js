@@ -11,8 +11,8 @@ let stop = {
 }
 
 const map = L.map("map",{
-    //center: [ stop.lat, stop.lng ], //coordinaten einfügen. kann ich hier auskommentieren, weil in Z31
-    //zoom: 13,
+    center: [ stop.lat, stop.lng ], //coordinaten einfügen. kann ich hier auskommentieren, weil in Z31
+    zoom: 13,
     fullscreenControl: true,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
@@ -65,7 +65,7 @@ nav.onchange = (evt) => {
 };
 
 //Minimap
-var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.grau"), {
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"), {
     toggleDisplay: true, //minimap ein und ausklappbar
     minimized: false //fangt im eingeklappten zustand an. diese einstellungen kann man alle in der leaflet/github davon nachlesen
 }).addTo(map);
