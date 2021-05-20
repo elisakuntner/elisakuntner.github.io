@@ -83,3 +83,23 @@ const selectedTrack = 31;
 drawTrack(selectedTrack);
 
 //https://github.com/mpetazzoni/leaflet-gpx Leafletplugin für GPX dateien, schauen wie viele esverwenden, wann zuletzt kommitet usw.
+
+
+//DROPDOWNMENU
+console.log("biketirol json: ", BIKETIROL); // Werte in console anschauen u zugreifen. 
+let pulldown = document.querySelector("#pulldown"); //so ole ich über die id eine referenz vovn einem element
+console.log("Pulldown: ", pulldown); // schauen ob ichs richtig gemacht habe!! immer wieder machen! wenn die werte ausspuckt passts
+for (let track of BIKETIROL) {
+//damit die route auch zum selectierte nTrakc wechselt nach dem drop down:
+let selected = ""; // leere var erstellen für schleife
+if (selectedTrack == track.nr) { //nur wenn der selectierte trakc mti der nummer übereinstimmt wird es angezeigt
+selected = "selected";
+}else { selected = "";}
+    pulldown.innerHTML += `<option value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
+
+
+};
+
+
+
+
