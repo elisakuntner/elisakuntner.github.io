@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1" creator="GPS Track Editor" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gte="http://www.gpstrackeditor.com/xmlschemas/General/1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" targetNamespace="http://www.topografix.com/GPX/1/1" elementFormDefault="qualified" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
 <metadata>
-	<name>gps-daten-btt-etappe-31-st-anton-steeg-gpx__gpx_track.gpx</name>
+	<name>31 St. Anton-Steeg</name>
 </metadata>
 <trk>
-	<name>gps-daten-btt-etappe-31-st-anton-steeg-gpx auf deine-berge.de</name>
+	<name>31 St. Anton-Steeg</name>
 	<trkseg>
 		<trkpt lat="47.123786" lon="10.247623">
 			<ele>1440.00</ele>
