@@ -49,13 +49,28 @@ const drawTrack = () => {
         async: true, //datei aus inet geladen, wartet mit dem bis es komplett geladen ist über server
         marker_options: {
             startIconUrl: `icons/number_${nr}.png`,
-            endIconUrl: 'iconss/finish.png',
+            endIconUrl: 'icons/finish.png',
             shadowUrl: null, //wird mit null nicht angezeigt
-        }
+        },
+        polyline_options: {
+            color: "black",
+            dashArray: [2, 5], //linie wird strichliert
+        },
     }).addTo(overlays.tracks); //Var definieren u auf den ordner tracks zugreifen
+    gpxTrack.on("loaded", () => {
+        console.log("loaded gpx");
+        map.fitBounds(gpxTrack.getBounds());
+    });
+    // //popup
+    // marker.bindPopup(`
+    // <ul>get_name(),
+    // <li>get_elevation_min()</li>
+    // <li>get_elevation_max()</li>
+    // <li>get_distance()</li>
+    // </ul>`)
 };
 
-const seectedTrack = 31;
+const selectedTrack = 31;
 drawTrack(selectedTrack);
 
 //https://github.com/mpetazzoni/leaflet-gpx Leafletplugin für GPX dateien
