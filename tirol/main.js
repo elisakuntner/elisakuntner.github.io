@@ -43,7 +43,14 @@ let layerControl = L.control.layers({
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
 
-const drawTrack = () => {
+const elevationControl = L.control.elevation({
+    elevationDiv: "#profile",
+    followMarker: false,
+    theme: "lime-theme",
+}).addTo(map);
+
+
+const drawTrack = (nr) => {
     console.log("Track: ", nr);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //datei aus inet geladen, wartet mit dem bis es komplett geladen ist über server
@@ -60,17 +67,19 @@ const drawTrack = () => {
     gpxTrack.on("loaded", () => {
         console.log("loaded gpx");
         map.fitBounds(gpxTrack.getBounds());
+    //popup
+    gpxTrack.bindPopup(`
+     <h3>${gpxTrack.get_name()}<h3>
+     <ul>
+        <li>minimale Höhe:  ${gpxTrack.get_elevation_min()}</li>
+        <li>maximale Höhe:  ${gpxTrack.get_elevation_max()}</li>
+        <li>Streckenlänge:  ${gpxTrack.get_distance()}</li>
+    </ul>`);
     });
-    // //popup
-    // marker.bindPopup(`
-    // <ul>get_name(),
-    // <li>get_elevation_min()</li>
-    // <li>get_elevation_max()</li>
-    // <li>get_distance()</li>
-    // </ul>`)
+    elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
 };
 
 const selectedTrack = 31;
 drawTrack(selectedTrack);
 
-//https://github.com/mpetazzoni/leaflet-gpx Leafletplugin für GPX dateien
+//https://github.com/mpetazzoni/leaflet-gpx Leafletplugin für GPX dateien, schauen wie viele esverwenden, wann zuletzt kommitet usw.
