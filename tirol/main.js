@@ -52,6 +52,8 @@ const elevationControl = L.control.elevation({
 
 const drawTrack = (nr) => {
     console.log("Track: ", nr);
+    elevationControl.clear();
+    overlays.tracks.clearLayers();
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //datei aus inet geladen, wartet mit dem bis es komplett geladen ist über server
         marker_options: {
@@ -91,14 +93,23 @@ let pulldown = document.querySelector("#pulldown"); //so ole ich über die id ei
 console.log("Pulldown: ", pulldown); // schauen ob ichs richtig gemacht habe!! immer wieder machen! wenn die werte ausspuckt passts
 for (let track of BIKETIROL) {
 //damit die route auch zum selectierte nTrakc wechselt nach dem drop down:
-let selected = ""; // leere var erstellen für schleife
-if (selectedTrack == track.nr) { //nur wenn der selectierte trakc mti der nummer übereinstimmt wird es angezeigt
-selected = "selected";
-}else { selected = "";}
-    pulldown.innerHTML += `<option value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
-
-
+    let selected = ""; // leere var erstellen für schleife
+    if (selectedTrack == track.nr) { //nur wenn der selectierte trakc mti der nummer übereinstimmt wird es angezeigt
+        selected = "selected";
+    }else { selected = "";}
+        pulldown.innerHTML += `<option value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
 };
+
+pulldown.onchange =() => {
+    console.log("changed!", pulldown.value);
+    drawTrack(pulldown.value) //mit dieser zeile kann man zwischen den routen wechseln.
+} //jetzt bleiben alle routen in der karte.
+//deswegen funktion clear siehe Zeile 55 u 56. 
+
+
+
+
+
 
 
 
