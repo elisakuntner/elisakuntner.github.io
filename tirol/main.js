@@ -86,8 +86,9 @@ const drawTrack = (nr) => {
     </ul>`);
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
-    elevationControl.load (`tracks/${nr}.gpx`)
-    activeElevationTrack = evt.layer;
+    elevationControl.on ("eledata_loaded", (evt) =>
+    { acitveElevationTrack = evt.layer;
+    });
 };
 
 const selectedTrack = 31;
@@ -97,7 +98,7 @@ drawTrack(selectedTrack);
 
 
 //DROPDOWNMENU
-console.log("biketirol json: ", BIKETIROL); // Werte in console anschauen u zugreifen. 
+//console.log("biketirol json: ", BIKETIROL); // Werte in console anschauen u zugreifen. 
 let pulldown = document.querySelector("#pulldown"); //so ole ich über die id eine referenz vovn einem element
 console.log("Pulldown: ", pulldown); // schauen ob ichs richtig gemacht habe!! immer wieder machen! wenn die werte ausspuckt passts
 for (let track of BIKETIROL) {
