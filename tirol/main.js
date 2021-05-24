@@ -42,18 +42,25 @@ let layerControl = L.control.layers({
 
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
-
+//Elecation control initialisieren
 const elevationControl = L.control.elevation({
     elevationDiv: "#profile",
     followMarker: false,
     theme: "lime-theme",
 }).addTo(map);
 
+let activeElevationTrack; //var erstellen
 
 const drawTrack = (nr) => {
     console.log("Track: ", nr);
     elevationControl.clear();
     overlays.tracks.clearLayers();
+    //bugfix for leaflet-elevatin plugin
+    if (activeElevationTrack) {
+        activeElevationTrack.removeFrom(map)
+    }
+    // for new browsers:
+    // activeElevationTrack?.removeFrom(map);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //datei aus inet geladen, wartet mit dem bis es komplett geladen ist über server
         marker_options: {
@@ -79,6 +86,8 @@ const drawTrack = (nr) => {
     </ul>`);
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
+    elevationControl.load (`tracks/${nr}.gpx`)
+    activeElevationTrack = evt.layer;
 };
 
 const selectedTrack = 31;
