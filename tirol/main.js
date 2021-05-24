@@ -53,14 +53,14 @@ let activeElevationTrack; //var erstellen
 
 const drawTrack = (nr) => {
     console.log("Track: ", nr);
-    elevationControl.clear();
-    overlays.tracks.clearLayers();
+    elevationControl.clear(); //löscht elevation data
+    overlays.tracks.clearLayers(); //löscht gpx layers
     //bugfix for leaflet-elevatin plugin
     if (activeElevationTrack) {
-        activeElevationTrack.removeFrom(map)
+        activeElevationTrack.removeFrom(map);
     }
     // for new browsers:
-    // activeElevationTrack?.removeFrom(map);
+    activeElevationTrack?.removeFrom(map);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //datei aus inet geladen, wartet mit dem bis es komplett geladen ist über server
         marker_options: {
