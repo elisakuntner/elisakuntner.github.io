@@ -51,8 +51,9 @@ const elevationControl = L.control.elevation({
 
 let activeElevationTrack; //var erstellen
 
+//Hoehenprofil Zeichnen Funktion:
 const drawTrack = (nr) => {
-    console.log("Track: ", nr);
+    //console.log("Track: ", nr);
     elevationControl.clear(); //löscht elevation data
     overlays.tracks.clearLayers(); //löscht gpx layers
     //bugfix for leaflet-elevatin plugin
@@ -60,7 +61,7 @@ const drawTrack = (nr) => {
         activeElevationTrack.removeFrom(map);
     }
     // for new browsers:
-    activeElevationTrack?.removeFrom(map);
+    //activeElevationTrack?.removeFrom(map);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //datei aus inet geladen, wartet mit dem bis es komplett geladen ist über server
         marker_options: {
@@ -74,20 +75,22 @@ const drawTrack = (nr) => {
         },
     }).addTo(overlays.tracks); //Var definieren u auf den ordner tracks zugreifen
     gpxTrack.on("loaded", () => {
-        console.log("loaded gpx");
+        //console.log("loaded gpx");
         map.fitBounds(gpxTrack.getBounds());
-    //popup
-    gpxTrack.bindPopup(`
+        //popup
+        gpxTrack.bindPopup(`
      <h3>${gpxTrack.get_name()}<h3>
      <ul>
         <li>minimale Höhe:  ${gpxTrack.get_elevation_min()}</li>
         <li>maximale Höhe:  ${gpxTrack.get_elevation_max()}</li>
         <li>Streckenlänge:  ${gpxTrack.get_distance()}</li>
+        <li>Höhenmeter bergauf: ${gpxTrack.get_elevation_gain()} m</li>
+        <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
     </ul>`);
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
-    elevationControl.on ("eledata_loaded", (evt) =>
-    { acitveElevationTrack = evt.layer;
+    elevationControl.on("eledata_loaded", (evt) => {
+        acitveElevationTrack = evt.layer;
     });
 };
 
@@ -100,27 +103,20 @@ drawTrack(selectedTrack);
 //DROPDOWNMENU
 //console.log("biketirol json: ", BIKETIROL); // Werte in console anschauen u zugreifen. 
 let pulldown = document.querySelector("#pulldown"); //so ole ich über die id eine referenz vovn einem element
-console.log("Pulldown: ", pulldown); // schauen ob ichs richtig gemacht habe!! immer wieder machen! wenn die werte ausspuckt passts
+//console.log("Pulldown: ", pulldown); // schauen ob ichs richtig gemacht habe!! immer wieder machen! wenn die werte ausspuckt passts
+let selected = ""; // leere var erstellen für schleife
 for (let track of BIKETIROL) {
-//damit die route auch zum selectierte nTrakc wechselt nach dem drop down:
-    let selected = ""; // leere var erstellen für schleife
+    //damit die route auch zum selectierte nTrakc wechselt nach dem drop down:
     if (selectedTrack == track.nr) { //nur wenn der selectierte trakc mti der nummer übereinstimmt wird es angezeigt
         selected = "selected";
-    }else { selected = "";}
-        pulldown.innerHTML += `<option value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
+    } else {
+        selected = "";
+    }
+    pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
 };
 
-pulldown.onchange =() => {
-    console.log("changed!", pulldown.value);
+pulldown.onchange = () => {
+    //console.log("changed!", pulldown.value);
     drawTrack(pulldown.value) //mit dieser zeile kann man zwischen den routen wechseln.
 } //jetzt bleiben alle routen in der karte.
 //deswegen funktion clear siehe Zeile 55 u 56. 
-
-
-
-
-
-
-
-
-
