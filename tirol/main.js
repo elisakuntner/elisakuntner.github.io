@@ -59,7 +59,7 @@ const drawWikipedia = (bounds) => {
     
 
     //console.log(bounds); 
-    //URL VERÄNDERN: github seiten laufen auf https und wenn man das mit https vermischt bekommt man eine warnung, also immer umändern. dann ändert man api in secure wei ldas der server sit üebr den das sichere läuft. 
+    //URL von geonames übr wikipedia artikl VERÄNDERN: github seiten laufen auf https und wenn man das mit https vermischt bekommt man eine warnung, also immer umändern. dann ändert man api in secure wei ldas der server sit üebr den das sichere läuft. 
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30`;
     //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
     //console.log(url);
@@ -182,9 +182,16 @@ const drawTrack = (nr) => {
 
 const selectedTrack = 31;
 drawTrack(selectedTrack);
+
 //Fkt update text
 const updateTexts = (nr) => {
     console.log(nr);
+    for (let etappe of BIKETIROL) {
+        //ist es die aktuelle ETappe?
+        if (etappe.nr == nr) {
+            console.log("unsere Etappe", etappe)
+        }
+    }
 };
 //https://github.com/mpetazzoni/leaflet-gpx Leafletplugin für GPX dateien, schauen wie viele esverwenden, wann zuletzt kommitet usw.
 
