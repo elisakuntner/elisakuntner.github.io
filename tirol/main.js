@@ -185,7 +185,7 @@ drawTrack(selectedTrack);
 
 //Fkt update text
 const updateTexts = (nr) => {
-    console.log(nr);
+    //console.log(nr);
     //wir wollen den text oberhalb der karte an die strecke anpassen.
     for (let etappe of BIKETIROL) {
         //ist es die aktuelle ETappe?
@@ -194,7 +194,7 @@ const updateTexts = (nr) => {
             //neuen eintrag generieren, diesen kann ich dann auch für den letzten eintrag in der html (weblink) verwendne
             etappe.homepage = `<a href="${etappe.weblink}">Homepage</a>`
             for (key in etappe) { //läuft durch alle etappen, passt sich an als schleife, dann in HTML mit ID reinschreiben.
-                console.log("key:", key, "value:", etappe[key]);
+                //console.log("key:", key, "value:", etappe[key]);
                 //gibt es ein element in HTML mit der ID "key" ? mit document query
                 if (document.querySelector(`#text-${key}`)) { //backticks für html, raute für id u key fpr daswas grad drinnen ist.
                     //console.log("Juhu", key, etappe[key]); //key und wert key der in etappe drinn ist
