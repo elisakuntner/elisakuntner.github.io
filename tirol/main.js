@@ -60,15 +60,30 @@ const drawWikipedia = (bounds) => {
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30`;
     //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
     console.log(url);
+//Icons einkopieren. besteht aus key value pairs
+    let icons = {
+        adm1st: "wikipedia_administration.png",
+        adm2nd: "wikipedia_administration.png",
+        adm3rd: "wikipedia_administration.png",
+        airport: "wikipedia_helicopter.png",
+        city: "wikipedia_smallcity.png",
+        glacier: "wikipedia_glacier-2.png",
+        landmark: "wikipedia_landmark.png",
+        railwaystation: "wikipedia_train.png",
+        river: "wikipedia_river-2.png",
+        mountain: "wikipedia_mountains.png",
+        waterbody: "wikipedia_lake.png",
+        default: "wikipedia_information.png",
+    };
 
     //URL bei genoames.org aufrufen und JSON-Daten abholen, fetch ist immer aufruf ins netz um was zu holen ****
     fetch(url).then(
         response => response.json()
     ).then(jsonData => {
-        console.log(jsonData)
+        console.log(jsonData);
 //Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
         for (let article of jsonData.geonames) {
-            let mrk = L.marker([article.lat, artciel.lng]) //marker braucht zuerst koordinaten
+            let mrk = L.marker([article.lat, article.lng]) //marker braucht zuerst koordinaten
             mrk.addTo(overlays.wikipedia);
             //optionales Bild definieren (für popup)
             let img = "";
@@ -129,8 +144,8 @@ const drawTrack = (nr) => {
         <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
     </ul>`);
 
-            // Wikipedia Artikel zeichnen
-            drawWikipedia(gpxTrack.getBounds());
+        // Wikipedia Artikel zeichnen
+        drawWikipedia(gpxTrack.getBounds());
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
     elevationControl.on("eledata_loaded", (evt) => {
