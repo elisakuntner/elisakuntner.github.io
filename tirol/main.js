@@ -70,12 +70,21 @@ const drawWikipedia = (bounds) => {
         for (let article of jsonData.geonames) {
             let mrk = L.marker([article.lat, artciel.lng]) //marker braucht zuerst koordinaten
             mrk.addTo(overlays.wikipedia);
-            //Popup erzeugen - image herholen
-            let img = "",
+            //optionales Bild definieren (für popup)
+            let img = "";
             if (article.thumbnailImg) {
                 img = `<img src="${article.thumbnailImg}"
                 alt="thumbnail"`
             }
+            //Popup definieren
+            mrk.bindPopup(`
+            <small>${article.feature}</small>
+            <h3>${article.title}(${article.elevation}m)</h3>
+            ${img}
+            <p>${article.summary}</p>
+            <a target="Wikipedia" href="https://${article.wikipediaUrl}">Wikipedia-Artikel</a>
+            `) //Feature in small (klein ) hinschreiben. dann werden elemente dazugefügt. target: beim ersten mal wird ein neues geöffnet, und beim nächsten mal geht auch wieder dorthin
+            
         }
     });
 };
