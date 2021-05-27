@@ -159,8 +159,7 @@ const drawTrack = (nr) => {
         <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
     </ul>`);
 
-        // Wikipedia Artikel zeichnen
-        drawWikipedia(gpxTrack.getBounds());
+
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
     elevationControl.on("eledata_loaded", (evt) => {
@@ -194,3 +193,11 @@ pulldown.onchange = () => {
     drawTrack(pulldown.value) //mit dieser zeile kann man zwischen den routen wechseln.
 } //jetzt bleiben alle routen in der karte.
 //deswegen funktion clear siehe Zeile 55 u 56. 
+
+
+//ICons sollen sich bei zoom verändern!
+map.on("zoomend moveend", () => {
+       // Wikipedia Artikel zeichnen
+ drawWikipedia(gpxTrack.map.getBounds()); //map hinzguefügt weil es die ganze karte geht
+});
+     
