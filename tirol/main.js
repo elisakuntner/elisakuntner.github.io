@@ -60,11 +60,16 @@ const drawWikipedia = (bounds) => {
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30` //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
     console.log(url);
 
-    //URL bei genoames.org aufrufen und JSON-Daten abholen
+    //URL bei genoames.org aufrufen und JSON-Daten abholen, fetch ist immer aufruf ins netz um was zu holen ****
     fetch(url).then(
         response => response.json()
     ).then(jsonData => {
         console.log(jsonData)
+//Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
+        for (let article of jsonData.geonames) {
+            let mrk = L.marker([article.lat, artciel.lng]) //marker braucht zuerst koordinaten
+            mrk.addTo(overlays.wikipedia)
+        }
     });
 };
 
