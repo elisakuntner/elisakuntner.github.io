@@ -53,13 +53,16 @@ const elevationControl = L.control.elevation({
     theme: "lime-theme",
 }).addTo(map);
 
-//Wikipedia Artikel Zeichnen username=meinusername ***!!!***
+//Wikipedia Artikel Zeichnen username=meinusername 
+let articleDrawn = {}; //schauen ob schon gezeichnet ist wegen zoom und pan einbau
 const drawWikipedia = (bounds) => {
-    console.log(bounds); 
+    //habe ich den article shon gezeichnet?
+
+    //console.log(bounds); 
     //URL VERÄNDERN: github seiten laufen auf https und wenn man das mit https vermischt bekommt man eine warnung, also immer umändern. dann ändert man api in secure wei ldas der server sit üebr den das sichere läuft. 
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30`;
     //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
-    console.log(url);
+    //console.log(url);
 //Icons einkopieren. besteht aus key value pairs
     let icons = {
         adm1st: "wikipedia_administration.png",
@@ -76,13 +79,20 @@ const drawWikipedia = (bounds) => {
         default: "wikipedia_information.png",
     };
 
-    //URL bei genoames.org aufrufen und JSON-Daten abholen, fetch ist immer aufruf ins netz um was zu holen ****
+    //URL bei genoames.org aufrufen und JSON-Daten abholen, fetch ist immer aufruf ins netz um was zu holen 
     fetch(url).then(
         response => response.json()
     ).then(jsonData => {
-        console.log(jsonData);
+        //console.log(jsonData);
 //Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
         for (let article of jsonData.geonames) {
+            if (articleDrawn [article.wikipediaUrl]) {
+                //Ja, nicht noch einmal zeichnen
+                //console.log("schon gesehen", artciel.wikipediaUrl) //schauen ob u wie oft es auftritt
+                continue; //darunterliegender code wird nicht ausgeführt, bzw. geht zum nächsten article
+            } else {
+                articleDrawn[article.wikipediaUrl] = true; //
+            }
             //welches icon sol verwendet werden?? mit if abfragen
             //bekannte icons 
             if (icons[article.feature]) {
