@@ -69,7 +69,13 @@ const drawWikipedia = (bounds) => {
 //Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
         for (let article of jsonData.geonames) {
             let mrk = L.marker([article.lat, artciel.lng]) //marker braucht zuerst koordinaten
-            mrk.addTo(overlays.wikipedia)
+            mrk.addTo(overlays.wikipedia);
+            //Popup erzeugen - image herholen
+            let img = "",
+            if (article.thumbnailImg) {
+                img = `<img src="${article.thumbnailImg}"
+                alt="thumbnail"`
+            }
         }
     });
 };
