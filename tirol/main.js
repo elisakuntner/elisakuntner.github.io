@@ -54,16 +54,17 @@ const elevationControl = L.control.elevation({
 }).addTo(map);
 
 //Wikipedia Artikel Zeichnen username=meinusername 
-let articleDrawn = {}; //schauen ob schon gezeichnet ist wegen zoom und pan einbau
+let articleDrawn = {}; //variable erstellen zum schauen ob schon gezeichnet ist wegen zoom und pan einbau
 const drawWikipedia = (bounds) => {
-    //habe ich den article shon gezeichnet?
+    
 
     //console.log(bounds); 
     //URL VERÄNDERN: github seiten laufen auf https und wenn man das mit https vermischt bekommt man eine warnung, also immer umändern. dann ändert man api in secure wei ldas der server sit üebr den das sichere läuft. 
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30`;
     //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
     //console.log(url);
-//Icons einkopieren. besteht aus key value pairs
+
+//**Icons einkopieren. besteht aus key value pairs - definieren die verschiedenen Icon marker
     let icons = {
         adm1st: "wikipedia_administration.png",
         adm2nd: "wikipedia_administration.png",
@@ -84,8 +85,9 @@ const drawWikipedia = (bounds) => {
         response => response.json()
     ).then(jsonData => {
         //console.log(jsonData);
-//Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
+//**Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
         for (let article of jsonData.geonames) {
+            //habe ich den article shon gezeichnet?
             if (articleDrawn [article.wikipediaUrl]) {
                 //Ja, nicht noch einmal zeichnen
                 //console.log("schon gesehen", artciel.wikipediaUrl) //schauen ob u wie oft es auftritt
@@ -100,8 +102,8 @@ const drawWikipedia = (bounds) => {
             }else {
                 article.feature = "default";
             }
-            let mrk = L.marker([article.lat, article.lng], {//marker , braucht zuerst koordinaten, dann werden die icons eingebaut, die oben definiert wruden. w
-                icon: L.icon({ //icon ist ein propertie mit L.icon u das hat wieder properties. liegen im icons verzeichnis
+            let mrk = L.marker([article.lat, article.lng], {//**marker , braucht zuerst koordinaten, dann werden die icons eingebaut, die oben definiert wruden. w
+                icon: L.icon({ //**icon ist ein propertie mit L.icon u das hat wieder properties. liegen im icons verzeichnis
                     iconUrl: `icons/${icons[article.feature]}`, //name der icons 
                     iconSize: [32, 37], //array höhe u breite, kann ich im img anschauen. mit der size ist der icon mittig, aber die iconspitze liegt nicht auf koordinate. also;
                     iconAnchor: [16, 37], //damit richitg positioniert, aber verdeckt durchpopup
@@ -110,7 +112,7 @@ const drawWikipedia = (bounds) => {
             });
 
             mrk.addTo(overlays.wikipedia);
-            //optionales Bild definieren (für popup)
+            //**optionales Bild definieren (für popup)
             let img = "";
             if (article.thumbnailImg) {
                 img = `<img src="${article.thumbnailImg}"
@@ -177,9 +179,13 @@ const drawTrack = (nr) => {
     });
 };
 
+
 const selectedTrack = 31;
 drawTrack(selectedTrack);
-
+//Fkt update text
+const updateTexts = (nr) => {
+    console.log(nr);
+};
 //https://github.com/mpetazzoni/leaflet-gpx Leafletplugin für GPX dateien, schauen wie viele esverwenden, wann zuletzt kommitet usw.
 
 
@@ -197,12 +203,15 @@ for (let track of BIKETIROL) {
     }
     pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
 };
+//erstes mal funktionsaufruf update texts: Metadaten der Etappe update
+updateTexts(pulldown.value);
 
 pulldown.onchange = () => {
     //console.log("changed!", pulldown.value);
     drawTrack(pulldown.value) //mit dieser zeile kann man zwischen den routen wechseln.
-} //jetzt bleiben alle routen in der karte.
-//deswegen funktion clear siehe Zeile 55 u 56. 
+    //Metadaten der Etappe updaten
+    updateTexts(pulldown.value); //bei mwechsel in eine etappe kommt in er konsole die etappennummer.
+} //jetzt bleiben alle routen in der karte. deswegen funktion clear siehe Zeile 55 u 56. 
 
 
 //ICons sollen sich bei zoom verändern!
