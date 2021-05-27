@@ -92,7 +92,7 @@ const drawWikipedia = (bounds) => {
             }
             let mrk = L.marker([article.lat, article.lng], {//marker , braucht zuerst koordinaten, dann werden die icons eingebaut, die oben definiert wruden. w
                 icon: L.icon({ //icon ist ein propertie mit L.icon u das hat wieder properties. liegen im icons verzeichnis
-                    iconUrl: `icons/${icons(article.feature)}`, //name der icons 
+                    iconUrl: `icons/${icons[article.feature]}`, //name der icons 
                     iconSize: [32, 37], //array höhe u breite, kann ich im img anschauen. mit der size ist der icon mittig, aber die iconspitze liegt nicht auf koordinate. also;
                     iconAnchor: [16, 37], //damit richitg positioniert, aber verdeckt durchpopup
                     popupAnchor: [0, -37], //mitte passt =0, dann nach oben verschieben um icongröße, dann gehts oberhalb auf
@@ -198,6 +198,6 @@ pulldown.onchange = () => {
 //ICons sollen sich bei zoom verändern!
 map.on("zoomend moveend", () => {
        // Wikipedia Artikel zeichnen
- drawWikipedia(gpxTrack.map.getBounds()); //map hinzguefügt weil es die ganze karte geht
+ drawWikipedia(map.getBounds()); //map hinzguefügt weil es die ganze karte geht
 });
      
