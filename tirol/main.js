@@ -53,6 +53,22 @@ const elevationControl = L.control.elevation({
     theme: "lime-theme",
 }).addTo(map);
 
+//Wikipedia Artikel Zeichnen username=meinusername ***!!!***
+const drawWikipedia = (bounds) => {
+    console.log(bounds); 
+    //URL VERÄNDERN: github seiten laufen auf https und wenn man das mit https vermischt bekommt man eine warnung, also immer umändern. dann ändert man api in secure wei ldas der server sit üebr den das sichere läuft. 
+    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30` //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
+    console.log(url);
+
+    //URL bei genoames.org aufrufen und JSON-Daten abholen
+    fetch(url).then(
+        response => response.json()
+    ).then(jsonData => {
+        console.log(jsonData)
+    });
+};
+
+
 let activeElevationTrack; //var erstellen
 
 //Hoehenprofil Zeichnen Funktion:
@@ -91,6 +107,9 @@ const drawTrack = (nr) => {
         <li>Höhenmeter bergauf: ${gpxTrack.get_elevation_gain()} m</li>
         <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
     </ul>`);
+
+            // Wikipedia Artikel zeichnen
+            drawWikipedia(gpxTrack.getBounds());
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
     elevationControl.on("eledata_loaded", (evt) => {
