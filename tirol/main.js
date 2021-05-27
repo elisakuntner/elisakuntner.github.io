@@ -189,7 +189,10 @@ const updateTexts = (nr) => {
     for (let etappe of BIKETIROL) {
         //ist es die aktuelle ETappe?
         if (etappe.nr == nr) {
-            console.log("unsere Etappe", etappe)
+            //console.log("unsere Etappe", etappe)
+            for (key in etappe) {
+                console.log("key:", key, "value:", etappe[key])
+            }
         }
     }
 };
