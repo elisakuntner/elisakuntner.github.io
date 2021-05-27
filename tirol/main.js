@@ -193,7 +193,7 @@ const updateTexts = (nr) => {
             //console.log("unsere Etappe", etappe)
             //neuen eintrag generieren, diesen kann ich dann auch für den letzten eintrag in der html (weblink) verwendne
             etappe.homepage = `<a href="${etappe.weblink}">Homepage</a>`
-            for (key in etappe) { //läuft durch alle etappen, passt sich an als schleife 
+            for (key in etappe) { //läuft durch alle etappen, passt sich an als schleife, dann in HTML mit ID reinschreiben.
                 console.log("key:", key, "value:", etappe[key]);
                 //gibt es ein element in HTML mit der ID "key" ? mit document query
                 if (document.querySelector(`#text-${key}`)) { //backticks für html, raute für id u key fpr daswas grad drinnen ist.
