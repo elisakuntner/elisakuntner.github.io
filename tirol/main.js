@@ -88,7 +88,7 @@ const drawWikipedia = (bounds) => {
 //**Artikle Marker erzeugen: dazu Arrays in einer forschleife aufrufen
         for (let article of jsonData.geonames) {
             //habe ich den article shon gezeichnet?
-            if (articleDrawn [article.wikipediaUrl]) {
+            if (articleDrawn[article.wikipediaUrl]) {
                 //Ja, nicht noch einmal zeichnen
                 //console.log("schon gesehen", artciel.wikipediaUrl) //schauen ob u wie oft es auftritt
                 continue; //darunterliegender code wird nicht ausgeführt, bzw. geht zum nächsten article
@@ -115,12 +115,12 @@ const drawWikipedia = (bounds) => {
             //**optionales Bild definieren (für popup)
             let img = "";
             if (article.thumbnailImg) {
-                img = `<img src="${article.thumbnailImg}"alt="thumbnail">`
+                img = `<img src="${article.thumbnailImg}"alt="thumbnail">`;
             }
             //Popup definieren
             mrk.bindPopup(`
             <small>${article.feature}</small>
-            <h3>${article.title}(${article.elevation}m)</h3>
+            <h3>${article.title} (${article.elevation}m)</h3>
             ${img}
             <p>${article.summary}</p>
             <a target="Wikipedia" href="https://${article.wikipediaUrl}">Wikipedia-Artikel</a>
@@ -161,7 +161,7 @@ const drawTrack = (nr) => {
         map.fitBounds(gpxTrack.getBounds());
         //popup
         gpxTrack.bindPopup(`
-     <h3>${gpxTrack.get_name()}<h3>
+     <h3>${gpxTrack.get_name()}</h3>
      <ul>
         <li>minimale Höhe:  ${gpxTrack.get_elevation_min()}m</li>
         <li>maximale Höhe:  ${gpxTrack.get_elevation_max()}m</li>
@@ -172,7 +172,7 @@ const drawTrack = (nr) => {
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
     elevationControl.on("eledata_loaded", (evt) => {
-        acitveElevationTrack = evt.layer;
+        activeElevationTrack = evt.layer;
     });
 };
 
