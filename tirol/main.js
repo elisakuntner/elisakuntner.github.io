@@ -115,8 +115,7 @@ const drawWikipedia = (bounds) => {
             //**optionales Bild definieren (für popup)
             let img = "";
             if (article.thumbnailImg) {
-                img = `<img src="${article.thumbnailImg}"
-                alt="thumbnail"`
+                img = `<img src="${article.thumbnailImg}"alt="thumbnail">`
             }
             //Popup definieren
             mrk.bindPopup(`
@@ -125,7 +124,7 @@ const drawWikipedia = (bounds) => {
             ${img}
             <p>${article.summary}</p>
             <a target="Wikipedia" href="https://${article.wikipediaUrl}">Wikipedia-Artikel</a>
-            `) //Feature in small (klein ) hinschreiben. dann werden elemente dazugefügt. target: beim ersten mal wird ein neues geöffnet, und beim nächsten mal geht auch wieder dorthin
+            `); //Feature in small (klein ) hinschreiben. dann werden elemente dazugefügt. target: beim ersten mal wird ein neues geöffnet, und beim nächsten mal geht auch wieder dorthin
             
         }
     });
@@ -164,9 +163,9 @@ const drawTrack = (nr) => {
         gpxTrack.bindPopup(`
      <h3>${gpxTrack.get_name()}<h3>
      <ul>
-        <li>minimale Höhe:  ${gpxTrack.get_elevation_min()}</li>
-        <li>maximale Höhe:  ${gpxTrack.get_elevation_max()}</li>
-        <li>Streckenlänge:  ${gpxTrack.get_distance()}</li>
+        <li>minimale Höhe:  ${gpxTrack.get_elevation_min()}m</li>
+        <li>maximale Höhe:  ${gpxTrack.get_elevation_max()}m</li>
+        <li>Streckenlänge:  ${gpxTrack.get_distance()}m</li>
         <li>Höhenmeter bergauf: ${gpxTrack.get_elevation_gain()} m</li>
         <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
     </ul>`);
@@ -191,7 +190,7 @@ const updateTexts = (nr) => {
             //console.log("unsere Etappe", etappe)
             //neuen eintrag generieren, diesen kann ich dann auch für den letzten eintrag in der html (weblink) verwendne
             etappe.homepage = `<a href="${etappe.weblink}">Homepage</a>`
-            for (key in etappe) { //läuft durch alle etappen, passt sich an als schleife, dann in HTML mit ID reinschreiben.
+            for (let key in etappe) { //läuft durch alle etappen, passt sich an als schleife, dann in HTML mit ID reinschreiben.
                 //console.log("key:", key, "value:", etappe[key]);
                 //gibt es ein element in HTML mit der ID "key" ? mit document query
                 if (document.querySelector(`#text-${key}`)) { //backticks für html, raute für id u key fpr daswas grad drinnen ist.
@@ -219,17 +218,17 @@ for (let track of BIKETIROL) {
     } else {
         selected = "";
     }
-    pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>` //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
-};
+    pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`; //forschleife um die elemente aufzurufen, += immer eines weitergehen. aufpassen immer schreiben dass track.was ich will steht....
+}
 //erstes mal funktionsaufruf update texts: Metadaten der Etappe update
 updateTexts(pulldown.value);
 
 pulldown.onchange = () => {
     //console.log("changed!", pulldown.value);
-    drawTrack(pulldown.value) //mit dieser zeile kann man zwischen den routen wechseln.
+    drawTrack(pulldown.value); //mit dieser zeile kann man zwischen den routen wechseln.
     //Metadaten der Etappe updaten
     updateTexts(pulldown.value); //bei mwechsel in eine etappe kommt in er konsole die etappennummer.
-} //jetzt bleiben alle routen in der karte. deswegen funktion clear siehe Zeile 55 u 56. 
+}; //jetzt bleiben alle routen in der karte. deswegen funktion clear siehe Zeile 55 u 56. 
 
 
 //ICons sollen sich bei zoom verändern!
