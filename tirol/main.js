@@ -62,7 +62,7 @@ const drawWikipedia = (bounds) => {
     //URL von geonames übr wikipedia artikl VERÄNDERN: github seiten laufen auf https und wenn man das mit https vermischt bekommt man eine warnung, also immer umändern. dann ändert man api in secure wei ldas der server sit üebr den das sichere läuft. 
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=elisakuntner&lang=de&maxRows=30`;
     //style full konnte man löschen. und dann müsse wir noch die koordinaten ändern im template string mit  $. dann am ende mit &lang=de diesprache auf deutsch stellen & mit max Rows kann man anzalh der ergebnisse einstellen ( defaultist glaub i 10)
-    //console.log(url);
+    console.log(url);
 
 //**Icons einkopieren. besteht aus key value pairs - definieren die verschiedenen Icon marker
     let icons = {
@@ -170,8 +170,6 @@ const drawTrack = (nr) => {
         <li>Höhenmeter bergauf: ${gpxTrack.get_elevation_gain()} m</li>
         <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
     </ul>`);
-
-
     });
     elevationControl.load(`tracks/${nr}.gpx`); //aufpassen wo mans reinläd
     elevationControl.on("eledata_loaded", (evt) => {
